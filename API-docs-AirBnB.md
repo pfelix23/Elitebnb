@@ -91,7 +91,7 @@ information.
 * Require Authentication: false
 * Request
   * Method: GET
-  * Route path: /users/:userId/login
+  * Route path: /login
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -157,7 +157,7 @@ user's information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * Route path: /users/sign-up
+  * Route path: /sign-up
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1258,7 +1258,7 @@ Delete an existing booking.
   Spot must belong to the current user
 * Request
   * Method: DELETE
-  * Route path: /users/:userId/spots/:spotId/bookings/:bookingId/delete
+  * Route path: bookings/:bookingId/delete
   * Body: none
 
 * Successful Response
@@ -1307,7 +1307,7 @@ Delete an existing image for a Spot.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: DELETE
-  * Route path: /users/:userId/spot/:spotId/img/delete
+  * Route path: /spots/:spotId/img/delete
   * Body: none
 
 * Successful Response
@@ -1342,7 +1342,7 @@ Delete an existing image for a Review.
 * Require proper authorization: Review must belong to the current user
 * Request
   * Method: DELETE
-  * Route path: /users/:userId/reviews/:reviewId/img/delete
+  * Route path: /reviews/:reviewId/img/delete
   * Body: none
 
 * Successful Response
