@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-`<https://dbdiagram.io/d/BnB-Diagram-67214afcb4216d5a28a5ac50>`
+`<https://dbdiagram.io/d/BnB-Diagram-67228f2b2c337ee119ef742e>`
 
 ## API Documentation
 
