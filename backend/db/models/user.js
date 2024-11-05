@@ -61,6 +61,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
     tableName: 'Users',
+    schema: process.env.SCHEMA,
     defaultScope: {
       attributes: {
         exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'],
