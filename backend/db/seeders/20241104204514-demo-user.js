@@ -64,7 +64,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('Users', {
-      type: users.map(user => user.type)
+      username: users.map(user => user.username)
     }, {});
   }
 };
