@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Booking.belongsTo(models.Spot, {foreignKey: 'spotId'});
-      Booking.belongsTo(models.User, {foreignKey: 'userId'});
+      Booking.belongsTo(models.Spot, {foreignKey: 'spotId', onDelete: 'CASCADE'});
+      Booking.belongsTo(models.User, {foreignKey: 'userId', onDelete: 'CASCADE'});
     }
   }
   Booking.init({
@@ -25,28 +25,24 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     startDate: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DATE,
       allowNull: false,
       validate: {
         isDate: true,
       }
     },
     endDate: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DATE,
       allowNull: false,
       validate: {
         isDate: true,
       }
     },
-    createdAt: {
-      type: DataTypes.STRING,
-    },
-    updatedAt: {
-      type: DataTypes.STRING,
-    }
+
   }, {
     sequelize,
     modelName: 'Booking',
+    defaultScope: {attributes:{include:['id']}}
   });
   return Booking;
 };

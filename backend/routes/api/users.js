@@ -38,13 +38,25 @@ const validateSignup = [
 
 // Sign up
 router.post(
-    '/', 
+    '/sign-up', 
     validateSignup,
     async (req, res) => {
       const { email, password, username, firstName, lastName } = req.body;
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({ email, username, firstName, lastName, hashedPassword });
-  
+
+      if(!email || !password || !username || !firstName || !lastName) {
+        return res.status(400).json({
+          message: "Bad Request", 
+         errors: {
+         email: "Invalid email",
+         username: "Username is required",
+         firstName: "First Name is required",
+         lastName: "Last Name is required"
+         }
+       })
+      };
+      
       const safeUser = {
         id: user.id,
         firstName: user.firstName,
@@ -57,13 +69,13 @@ router.post(
           email: email
         }
       });
-
+      
       const usedUserName = await User.findOne({
         where: {
           username: username
         }
       })
-
+      
       if(usedEmail || usedUserName) {
        return res.status(500).json({
         message: "User already exists",
@@ -76,7 +88,7 @@ router.post(
   
       await setTokenCookie(res, safeUser);
   
-      return res.json({
+      return res.status(201).json({
         user: safeUser
       });
     }
@@ -119,13 +131,13 @@ router.post(
         attributes: ['id', 'firstName', 'lastName']
       },
     {   model: Spot,
-        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price', 'previewImg' ]
+        attributes: ['id', 'ownerId', 'address','city', 'state', 'country', 'lat', 'lng', 'name', 'price', 'previewImage' ]
     }, {
         model: ReviewImage,
         attributes: ['id', 'url']
     }]
     })
-    res.json(reviews)
+    res.json({Reviews:reviews})
   })
 
 router.get('/:userId/bookings', async (req, res) => {
@@ -135,10 +147,11 @@ router.get('/:userId/bookings', async (req, res) => {
       userId
     },
     include: [{
-      model: Spot
+      model: Spot,
+      attributes: {exclude: ['createdAt', 'updatedAt']}
     }]
   });
 
-  res.json(bookings)
+  res.json({Bookings: bookings})
 })
 module.exports = router;

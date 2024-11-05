@@ -453,7 +453,7 @@ Create and return a new image for a spot specified by id.
 * Require Authentication: true
 * Require proper authorization: Spot must belong to the current user
 * Request
-  * Method: PATCH
+  * Method: POST
   * Route path: /spots/:spotId/addImg
   * Headers:
     * Content-Type: application/json
@@ -500,7 +500,7 @@ Updates and returns an existing spot.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: PUT
-  * Route path: users/:userId/spots/:spotId/edit
+  * Route path: spots/:spotId/edit
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -586,7 +586,7 @@ Deletes an existing spot.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: DELETE
-  * Route path: /users/:userId/spots/:spotId/delete
+  * Route path: spots/:spotId/delete
   * Body: none
 
 * Successful Response
@@ -867,7 +867,7 @@ Update and return an existing review.
 * Require Authentication: true
 * Require proper authorization: Review must belong to the current user
 * Request
-  * Method: PATCH
+  * Method: PUT
   * Route path: /reviews/:reviewId/edit
   * Headers:
     * Content-Type: application/json
@@ -934,7 +934,7 @@ Delete an existing review.
 * Require proper authorization: Review must belong to the current user
 * Request
   * Method: DELETE
-  * Route path: /users/:userId/reviews/:reviewId/delete
+  * Route path: reviews/:reviewId/delete
   * Body: none
 
 * Successful Response
@@ -1164,7 +1164,7 @@ Update and return an existing booking.
 * Require Authentication: true
 * Require proper authorization: Booking must belong to the current user
 * Request
-  * Method: PATCH
+  * Method: PUT
   * Route path: /bookings/:bookingId/edit
   * Headers:
     * Content-Type: application/json
@@ -1309,7 +1309,7 @@ Delete an existing image for a Spot.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: DELETE
-  * Route path: /spots/:spotId/img/:imgId
+  * Route path: /spots/:spotId/spotImages/:imageId/delete
   * Body: none
 
 * Successful Response

@@ -25,7 +25,7 @@ router.put('/:bookingId/edit', async (req, res) => {
             message: "Booking couldn't be found"
         })
     }
-    if(end > currentDate) {
+    if(end < currentDate) {
         return res.status(403).json({
             message: "Past bookings can't be modified"
         })

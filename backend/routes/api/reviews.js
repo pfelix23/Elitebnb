@@ -9,28 +9,28 @@ router.post('/:reviewId/addImg', async (req, res) => {
     const {url} = req.body;
     const {reviewId} = req.params;
     const id = parseInt(reviewId);
-    const numOfReviewImg = await ReviewImage.findAll({
-        where: {
-            reviewId: id
-        }
-    })
+    const review = await Review.findByPk(reviewId)
 
-    if(numOfReviewImg >= 10) {
+
+    if(review.reviewImageCounter >= 10) {
         return res.status(403).json({
             message: "Maximum number of images for this resource was reached"
         })
     }
 
-    if(await Review.findByPk(reviewId)) {
+    if(review) {
+    
+    review.reviewImageCounter+=1;
         
     const newImg = await ReviewImage.create({url, reviewId: id});
+
 
     const response = {
     id: newImg.id,
     url: newImg.url,
 };
-
-    res.json(response)
+   
+    res.status(201).json(response)
 } else {
         res.status(404).json({
             message:"Review couldn't be found"
@@ -67,15 +67,7 @@ router.put('/:reviewId/edit', async (req, res) => {
         }
     })
     
-    const reviewed = {
-        id: theReviewed.id,
-        userId: theReviewed.userId,
-        spotId: theReviewed.spotId,
-        review: review,
-        stars: stars,
-        createdAt: theReviewed.createdAt,
-        updatedAt: theReviewed.updatedAt
-    }
+    const reviewed = await Review.findByPk(reviewId)
 
     res.json(reviewed);
     
@@ -103,9 +95,9 @@ router.delete('/:reviewId/delete', async (req, res) => {
     })
 });
 
-router.delete('/:reviewId/reviewImages/:imgId', async (req, res) => {
-    const imageId = req.params.imgId;
-    const reviewImage = await ReviewImage.findByPk(imgId)
+router.delete('/:reviewId/reviewImages/:imageId', async (req, res) => {
+    const imageId = req.params.imageId;
+    const reviewImage = await ReviewImage.findByPk(imageId)
 
     if(!reviewImage) {
        return res.status(404).json({

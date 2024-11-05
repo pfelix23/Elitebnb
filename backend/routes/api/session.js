@@ -25,7 +25,7 @@ const validateLogin = [
 
 // Log in
 router.post(
-    '/',
+    '/login',
     validateLogin,
     async (req, res, next) => {
       const { credential, password } = req.body;
@@ -45,6 +45,16 @@ router.post(
         err.title = 'Login failed';
         err.errors = { credential: 'The provided credentials were invalid.' };
         return next(err);
+      }
+
+      if(!credential || !password) {
+        return res.status(400).json({
+          message: "Bad Request", 
+          errors: {
+          credential: "Email or username is required",
+          password: "Password is required"
+         }
+       })
       }
   
       const safeUser = {
