@@ -70,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Spot',
     defaultScope: {
-     attributes: {include: ['id', 'ownerId', 'createdAt', 'updatedAt']}
+     attributes: {include: ['id', 'ownerId']}
     }
   });
   return Spot;

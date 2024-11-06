@@ -39,31 +39,21 @@ const validateSignup = [
 // Sign up
 router.post(
     '/sign-up', 
-    validateSignup,
+    // validateSignup,
     async (req, res) => {
       const { email, password, username, firstName, lastName } = req.body;
-      const hashedPassword = bcrypt.hashSync(password);
-      const user = await User.create({ email, username, firstName, lastName, hashedPassword });
-
       if(!email || !password || !username || !firstName || !lastName) {
         return res.status(400).json({
-          message: "Bad Request", 
-         errors: {
-         email: "Invalid email",
-         username: "Username is required",
-         firstName: "First Name is required",
-         lastName: "Last Name is required"
+          message: "Bad Request",
+          errors: {
+          email: "Invalid email",
+          username: "Username is required",
+          firstName: "First Name is required",
+          lastName: "Last Name is required"
          }
        })
-      };
-      
-      const safeUser = {
-        id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        username: user.username,
-      };
+      }
+      const hashedPassword = bcrypt.hashSync(password);
       const usedEmail = await User.findOne({
         where: {
           email: email
@@ -75,16 +65,26 @@ router.post(
           username: username
         }
       })
+
       
       if(usedEmail || usedUserName) {
-       return res.status(500).json({
-        message: "User already exists",
-        errors: {
-        email: "User with that email already exists",
-        username: "User with that username already exists"
-  }        
-       })
+        return res.status(500).json({
+          message: "User already exists",
+          errors: {
+            email: "User with that email already exists",
+            username: "User with that username already exists"
+          }        
+        })
       }
+      const user = await User.create({ email, username, firstName, lastName, hashedPassword });
+      
+      const safeUser = {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        username: user.username,
+      };
   
       await setTokenCookie(res, safeUser);
   
@@ -97,34 +97,54 @@ router.post(
   router.get('/:userId', async (req, res) => {
     let userId = req.params.userId
     const user =await User.findByPk(userId)
-    if(!user) {
+    const token = req.cookies
+    if(!token) {
       return res.json({
         user: null
       })
     };
 
-    res.json(user)
+    res.json({
+      user: user
+    })
   });
 
 
   router.get('/:userId/spots', async (req, res) => {
     const ownerId = req.params.userId
+    if(req.user.id != ownerId) {
+      return res.status(401).json({
+        message: "Authentication required"
+      })
+    }
     const spots = await Spot.findAll({
       where: {
         ownerId: ownerId
+      },
+      attributes: {
+        exclude: ['numReviews']
       }
     })
     res.json({
-      Spots: spots
+      Spots: spots,
     })
   });
 
   router.get('/:userId/reviews', async (req,res) => {
     const userId = req.params.userId;
 
+    if(req.user.id != userId) {
+      return res.status(401).json({
+        message: "Authentication required"
+      })
+    }
+
     const reviews = await Review.findAll({
       where: {
         userId: userId
+      },
+      attributes: {
+        exclude: ['reviewImageCounter']
       },
       include: [{
         model: User,
@@ -142,16 +162,25 @@ router.post(
 
 router.get('/:userId/bookings', async (req, res) => {
   const userId = req.params.userId;
+
+  if(req.user.id != userId) {
+    return res.status(401).json({
+      message: "Authentication required"
+    })
+  };
+
   const bookings = await Booking.findAll({
     where: {
-      userId
+      userId: req.user.id
     },
     include: [{
       model: Spot,
-      attributes: {exclude: ['createdAt', 'updatedAt']}
+      attributes: {exclude: ['createdAt', 'updatedAt', 'description', 'numReviews', 'avgRating']}
     }]
   });
 
   res.json({Bookings: bookings})
 })
+
+
 module.exports = router;

@@ -16,6 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Booking.init({
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -41,8 +47,7 @@ module.exports = (sequelize, DataTypes) => {
 
   }, {
     sequelize,
-    modelName: 'Booking',
-    defaultScope: {attributes:{include:['id']}}
+    modelName: 'Booking'
   });
   return Booking;
 };

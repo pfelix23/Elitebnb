@@ -26,7 +26,9 @@ module.exports = {
         allowNull: false
       },
       reviewImageCounter: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false
       },      
       createdAt: {
         allowNull: false,

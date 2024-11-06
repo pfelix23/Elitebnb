@@ -3,6 +3,7 @@ const { Spot } = require('../../db/models');
 const { SpotImage } = require('../../db/models');
 const { User } = require('../../db/models');
 const { Review } = require('../../db/models');
+const { ReviewImage } = require('../../db/models');
 const { Booking } = require('../../db/models');
 const { Op } = require('sequelize');
 const router = express.Router();
@@ -11,6 +12,12 @@ const router = express.Router();
 
 router.post('/create', async (req, res) => {
     const {address, city, state, country, lat, lng, name, description, price} = req.body;
+
+    if(!req.user.id) {
+        return res.status(401).json({
+          message: "Authentication required"
+        })
+      }
     
 
     if(!address || !city || !state || !country || !lat || !lng || !name || !description || !price) {
@@ -28,19 +35,13 @@ router.post('/create', async (req, res) => {
         price: "Price per day must be a positive number"
       }
         })
-    } else {
+    } 
         const spot = await Spot.create({ address, city, state, country, lat, lng, name, description, price, ownerId: req.user.id });
         res.status(201).json(spot)
-}
+
 
 })
 
-router.get('/', async (req, res) => {
-    
-    res.json({
-        Spots: await Spot.findAll()
-    })
-  })
 
 router.get('/:spotId', async (req, res) => {
     const spotId = req.params.spotId;
@@ -56,18 +57,20 @@ router.get('/:spotId', async (req, res) => {
       where: {
         id:spotId
       },
-      include: [{
+      attributes: {
+        exclude: ['previewImage']
+    },
+    include: [{
+        model: SpotImage,
+        where: {
+            spotId: spotId
+        },
+        attributes: ['id', 'url', 'preview']
+        },{
         model: User,
         as: 'Owner',
         attributes: ['id', 'firstName', 'lastName']
-        },
-        
-            {model: SpotImage,
-            where: {
-                spotId: spotId
-            },
-            attributes: ['id', 'url', 'preview']}]
-        
+    }]
       
     }))
   });
@@ -76,9 +79,20 @@ router.get('/:spotId', async (req, res) => {
     const {url, preview} = req.body;
     const {spotId} = req.params;
     const id = parseInt(spotId);
+    const spot = await Spot.findByPk(spotId)
+    
+    if(req.user.id != spot.ownerId) {
+        return res.status(401).json({
+          message: "Authentication required"
+        })
+      }
 
-    if(await Spot.findByPk(spotId)) {
-        
+    if(!spot) {
+        return res.status(404).json({
+            message:"Spot couldn't be found"
+        })
+    } 
+
     const newImg = await SpotImage.create({url, spotId:id, preview});
 
     const response = {
@@ -86,13 +100,7 @@ router.get('/:spotId', async (req, res) => {
     url: newImg.url,
     preview: newImg.preview,
 };
-
     res.status(201).json(response)
-} else {
-        res.status(404).json({
-            message:"Spot couldn't be found"
-        })
-    }
 
   });
 
@@ -100,6 +108,12 @@ router.get('/:spotId', async (req, res) => {
     const {address, city, state, country, lat, lng, name, description, price} = req.body
     const spotId = req.params.spotId;
     const spot = await Spot.findByPk(spotId);
+
+    if(req.user.id != ownerId) {
+        return res.status(401).json({
+          message: "Authentication required"
+        })
+      }
 
     if (!spot) {
         return res.status(404).json({
@@ -124,18 +138,31 @@ router.get('/:spotId', async (req, res) => {
          })
      } 
 
-     await Spot.update({address, city, state, country, lat, lng, name, description, price, ownerId: req.user.id},
+     await Spot.update({address, city, state, country, lat, lng, name, description, price},
         {where: {id: spotId}}
     );
 
-    const otherSpot = await Spot.findByPk(spotId)
+    const otherSpot = await Spot.findOne({
+        where: {
+            id: spotId
+        },
+        attributes: {
+            exclude: ['numReviews', 'avgRating', 'previewImage']
+        }
+    })
     
     res.json(otherSpot)
   })
 
 router.delete('/:spotId/delete', async (req, res) => {
     const spotId = req.params.spotId;
-    const spot = await Spot.findByPk(spotId)
+    const spot = await Spot.findByPk(spotId);
+
+    if(req.user.id != ownerId) {
+        return res.status(401).json({
+          message: "Authentication required"
+        })
+      }
 
     if(!spot) {
        return res.status(404).json({
@@ -166,12 +193,17 @@ router.get('/:spotId/reviews', async (req, res) => {
         where: {
             spotId: spotId
         },
-        include: {
-            model: User,
-            attributes: ['id','firstName','lastName']
+        attributes: {
+            exclude: ['reviewImageCounter']
         },
-            model: ReviewImage,
+        include: [{
+            model: User,
+            attributes: ['id','firstName','lastName']},
+
+            {model: ReviewImage,
             attributes: ['id', 'url']
+        }],
+            
     })
 
     res.json(review)
@@ -182,10 +214,17 @@ router.post('/:spotId/review/create', async (req, res) => {
     const spot = await Spot.findByPk(spotId);
     const currentReview = await Review.findOne({
         where: {
-            spotId: spotId
+            spotId: spotId,
+            userId: req.user.id
         }
     });
     const {review, stars} = req.body
+
+    if(!req.user.id) {
+        return res.status(401).json({
+          message: "Authentication required"
+        })
+      }
     if(!review || !stars) {
         return res.status(400).json({
             message: "Bad Request",
@@ -206,21 +245,58 @@ router.post('/:spotId/review/create', async (req, res) => {
         })
     };
     
-    const newReview = await Review.create({review, stars, userId:req.user.id, spotId:spot.id});
+       await Review.create({
+        review, 
+        stars, 
+        userId:req.user.id, 
+        spotId:spot.id,
+        attributes: {
+            exclude: ['reviewImageCounter']
+        }
+    });
+    const newReview = await Review.findOne({
+        where: {
+            spotId: spotId,
+            userId: req.user.id
+        },
+        attributes: {
+            exclude: ['reviewImageCounter']
+        }
+    })
+
+
 
     res.status(201).json(newReview)
 });
 
 router.get('/:spotId/bookings', async (req, res) => {
     const spotId = req.params.spotId;
-    const spot = await Spot.findByPk(spotId)
+    const spot = await Spot.findByPk(spotId);
     const bookings = await Booking.findAll({
         where: {
-          spotId
+            spotId: spotId
         }
-      });
-      if(bookings && spot.ownerId !== req.user.id) {
-        return res.status(200).json(bookings)
+    });
+    if(!bookings) {
+      return res.status(404).json({
+          message: "Spot couldn't be found"
+      })
+    };
+    if(!req.user.id) {
+        return res.status(401).json({
+          message: "Authentication required"
+        })
+      }
+
+    if(bookings && spot.ownerId !== req.user.id) {
+        return res.status(200).json(await Booking.findAll({
+            where: {
+                spotId: spotId
+            },
+            attributes: {
+              exclude: ['userId', 'createdAt', 'updatedAt','id']
+            }
+        }))
       };
 
       if(bookings && spot.ownerId === req.user.id) {
@@ -235,11 +311,6 @@ router.get('/:spotId/bookings', async (req, res) => {
           });
         return res.status(200).json(booked)
       }
-      if(!bookings) {
-        return res.status(404).json({
-            message: "Spot couldn't be found"
-        })
-      }
 });
 
 router.post('/:spotId/bookings/create', async (req,res) => {
@@ -249,7 +320,8 @@ router.post('/:spotId/bookings/create', async (req,res) => {
     const id = parseInt(spotId);
     const start = new Date(startDate);
     const end = new Date(endDate);
-    if(!startDate || !endDate) {
+    const currentDate = new Date();
+    if(!startDate || !endDate || currentDate > start || start >= end) {
         return res.status(400).json({
             message: "Bad Request", 
             errors: {
@@ -263,19 +335,36 @@ router.post('/:spotId/bookings/create', async (req,res) => {
             message: "Spot couldn't be found"
         })
     };
+
+    if(!req.user.id) {
+        return res.status(401).json({
+          message: "Authentication required"
+        })
+      };
     const bookingConflict = await Booking.findOne({
         where: {
             spotId: spotId,
-        },
-        [Op.or]: [{
-            startDate: {[Op.lt]: end}
-        },
+        
+        [Op.or]: [
+            {
+            startDate: {[Op.lt]: end},
+            endDate: {[Op.gt]: start},
+        },  {
+            startDate: {[Op.eq]: end},
+            endDate: {[Op.gt]: start},
+        }, 
         {
-             endDate: {[Op.gt]: start}
-        },
+            startDate: {[Op.gte]: start},
+            endDate: {[Op.lte]: end}
+        }, 
+        {
+            startDate: {[Op.gte]: start},
+            endDate: {[Op.gt]: end}
+        }
         
     ]
-    })
+}})
+   
     if(bookingConflict) {
         return res.status(403).json({
            message: "Sorry, this spot is already booked for the specified dates",
@@ -288,6 +377,7 @@ router.post('/:spotId/bookings/create', async (req,res) => {
 
     const booking = await Booking.create({startDate, endDate, spotId:id, userId:req.user.id});
     
+    
 
     res.status(201).json(booking)
 });
@@ -295,12 +385,20 @@ router.post('/:spotId/bookings/create', async (req,res) => {
 router.delete('/:spotId/spotImages/:imageId/delete', async (req, res) => {
     const imageId = req.params.imageId;
     const image = await SpotImage.findByPk(imageId)
+    const spotId = req.params.spotId;
+    const spot = await Spot.findByPk(spotId)
 
     if(!image) {
        return res.status(404).json({
             message: "Spot Image couldn't be found"
         })
     };
+
+    if(req.user.id != spot.ownerId) {
+        return res.status(401).json({
+          message: "Authentication required"
+        })
+      }
 
     await SpotImage.destroy({
         where: {
@@ -314,21 +412,16 @@ router.delete('/:spotId/spotImages/:imageId/delete', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-    const {page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice} = req.query;
-    const filters = {};
+    let {page = 1, size = 20 , minLat, maxLat, minLng, maxLng, minPrice, maxPrice} = req.query;
+    
 
-    // if(Number.isNaN(page) || page < 1) page = 1;
-    // if(Number.isNaN(size) || size > 20 || size < 1) size = 20;
 
-    if(minLat) filters.lat = {[Op.gte]: parseFloat(minLat)};
-    if(maxLat) filters.lat = {...filters.lat,[Op.lte]: parseFloat(maxLat)};
-    if(minLng) filters.lng = {[Op.gte]: parseFloat(minLng)};
-    if(maxLng) filters.lng = {...filters.lng,[Op.lte]: parseFloat(maxLng)};
-    if(minPrice) filters.price = {[Op.gte]: parseFloat(minPrice)};
-    if(maxPrice) filters.price = {...filters.price,[Op.lte]: parseFloat(maxPrice)};
+    page = parseInt(page);
+    size = parseInt(size);
 
-    if(page < 1 || size > 20 || !minLat || !maxLat || !minLng || !maxLng || !minPrice || !maxPrice) {
-       return res.status(400).json({
+    
+    if(page < 1 || size > 20 || size < 1 || minPrice && minPrice < 0 || maxPrice && maxPrice < 0 || minLat && minLat < -90 || maxLat && maxLat > 90 ||minLng && minLng < -180 || maxLng && maxLng> 180){
+        return res.status(400).json({
         message: "Bad Request", 
         errors: {
           page: "Page must be greater than or equal to 1",
@@ -339,17 +432,23 @@ router.get('/', async (req, res) => {
           maxLng: "Minimum longitude is invalid",
           minPrice: "Minimum price must be greater than or equal to 0",
           maxPrice: "Maximum price must be greater than or equal to 0"
-       }
-     })
-    }
+        }
+    })
+}
 
-    const filtered = await Spot.findAll({
-        where: filters,
+    const Spots = await Spot.findAll({
         limit: size,
-        offset: (page-1) * size
+        offset: size * (page-1),
+        attributes: {
+            exclude: ['numReviews', 'createdAt', 'updatedAt']
+        }
     })
 
-    res.json(filtered)
+    res.json({
+        Spots,
+        page,
+        size
+    })
 } )
 
 module.exports = router;

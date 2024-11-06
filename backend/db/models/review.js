@@ -35,17 +35,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     reviewImageCounter: {
       type: DataTypes.INTEGER,
-      defaultValue: 0
+      defaultValue: 0,
+      allowNull: false
     }
     
   }, {
     sequelize,
     modelName: 'Review',
-    defaultScope: {
-      attributes: {
-        exclude:['reviewImageCounter']
-      }
-    }
+    
   });
   return Review;
 };

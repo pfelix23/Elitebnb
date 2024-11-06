@@ -11,7 +11,7 @@ router.put('/:bookingId/edit', async (req, res) => {
     const start = new Date(startDate);
     const currentDate = new Date();
     const booking = await Booking.findByPk(bookingId);
-    if(start < currentDate || end <= start) {
+    if(start < currentDate) {
         return res.status(400).json({
             message: "Bad Request", 
             errors: {
@@ -24,7 +24,14 @@ router.put('/:bookingId/edit', async (req, res) => {
         return res.status(404).json({
             message: "Booking couldn't be found"
         })
-    }
+    };
+
+    if(req.user.id != booking.userId) {
+        return res.status(401).json({
+          message: "Authentication required"
+        })
+      };
+
     if(end < currentDate) {
         return res.status(403).json({
             message: "Past bookings can't be modified"
@@ -36,14 +43,26 @@ router.put('/:bookingId/edit', async (req, res) => {
             id: {
                 [Op.ne]: bookingId
             }
-        },
-        [Op.or]: [{
-            startDate: {[Op.lt]: end}
-        },
+        ,
+        [Op.or]: [
+            {
+            startDate: {[Op.lt]: end},
+            endDate: {[Op.gt]: start},
+        },  {
+            startDate: {[Op.eq]: end},
+            endDate: {[Op.gt]: start},
+        }, 
         {
-             endDate: {[Op.gt]: start}
-        }]
-    })
+            startDate: {[Op.gte]: start},
+            endDate: {[Op.lte]: end}
+        }, 
+        {
+            startDate: {[Op.gte]: start},
+            endDate: {[Op.gt]: end}
+        }
+        
+    ]
+}})
     if(bookingConflict) {
         return res.status(403).json({
            message: "Sorry, this spot is already booked for the specified dates",
@@ -53,15 +72,19 @@ router.put('/:bookingId/edit', async (req, res) => {
   } 
         })
     }
-    await Booking.update({startDate, endDate},
+     await Booking.update({startDate, endDate},
         {where: {
             id: bookingId
         }}
     );
 
+    const booked = await Booking.findOne({
+        where: {
+            id: bookingId
+        }
+    })
 
-
-    res.json(booking)
+    res.json(booked)
 
 
 });
@@ -76,6 +99,12 @@ router.delete('/:bookingId/delete', async (req, res) => {
             message: "Booking couldn't be found"
         })
     };
+
+    if(req.user.id != booking.userId) {
+        return res.status(401).json({
+          message: "Authentication required"
+        })
+      }
     if(currentDate > booking.startDate) {
         return res.status(403).json({
             message: "Bookings that have been started can't be deleted"
