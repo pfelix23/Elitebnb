@@ -1,16 +1,30 @@
 const express = require('express');
 const { User } = require('../../db/models');
+const { Spot } = require('../../db/models');
 const { Booking } = require('../../db/models');
 const { Op } = require('sequelize');
+const { requireAuth } = require('../../utils/auth');
 const router = express.Router();
 
-router.put('/:bookingId/edit', async (req, res) => {
+router.put('/:bookingId/edit', requireAuth, async (req, res) => {
     const bookingId = req.params.bookingId;
     const {startDate, endDate} = req.body;
     const end = new Date(endDate);
     const start = new Date(startDate);
     const currentDate = new Date();
     const booking = await Booking.findByPk(bookingId);
+    if(!booking) {
+        return res.status(404).json({
+            message: "Booking couldn't be found"
+        })
+    };
+    
+    if(req.user.id != booking.userId) {
+        return res.status(403).json({
+            message: "Forbidden"
+        })
+    };
+    
     if(start < currentDate) {
         return res.status(400).json({
             message: "Bad Request", 
@@ -20,17 +34,6 @@ router.put('/:bookingId/edit', async (req, res) => {
            }
         })
     }
-    if(!booking) {
-        return res.status(404).json({
-            message: "Booking couldn't be found"
-        })
-    };
-
-    if(req.user.id != booking.userId) {
-        return res.status(401).json({
-          message: "Authentication required"
-        })
-      };
 
     if(end < currentDate) {
         return res.status(403).json({
@@ -89,10 +92,11 @@ router.put('/:bookingId/edit', async (req, res) => {
 
 });
 
-router.delete('/:bookingId/delete', async (req, res) => {
+router.delete('/:bookingId', requireAuth, async (req, res) => {
     const bookingId = req.params.bookingId;
     const booking = await Booking.findByPk(bookingId);
     const currentDate = new Date();
+    const spot = await Spot.findByPk(booking.spotId);
 
     if(!booking) {
        return res.status(404).json({
@@ -100,9 +104,9 @@ router.delete('/:bookingId/delete', async (req, res) => {
         })
     };
 
-    if(req.user.id != booking.userId) {
+    if(req.user.id != booking.userId || req.user.id != spot.ownerId) {
         return res.status(401).json({
-          message: "Authentication required"
+          message: "Forbidden"
         })
       }
     if(currentDate > booking.startDate) {

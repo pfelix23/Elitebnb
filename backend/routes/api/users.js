@@ -38,8 +38,7 @@ const validateSignup = [
 
 // Sign up
 router.post(
-    '/sign-up', 
-    // validateSignup,
+    '/', 
     async (req, res) => {
       const { email, password, username, firstName, lastName } = req.body;
       if(!email || !password || !username || !firstName || !lastName) {
@@ -110,64 +109,7 @@ router.post(
   });
 
 
-  router.get('/:userId/spots', async (req, res) => {
-    const ownerId = req.params.userId
-    if(req.user.id != ownerId) {
-      return res.status(401).json({
-        message: "Authentication required"
-      })
-    }
-    const spots = await Spot.findAll({
-      where: {
-        ownerId: ownerId
-      },
-      attributes: {
-        exclude: ['numReviews']
-      }
-    })
-    res.json({
-      Spots: spots,
-    })
-  });
-
-  router.get('/:userId/reviews', async (req,res) => {
-    const userId = req.params.userId;
-
-    if(req.user.id != userId) {
-      return res.status(401).json({
-        message: "Authentication required"
-      })
-    }
-
-    const reviews = await Review.findAll({
-      where: {
-        userId: userId
-      },
-      attributes: {
-        exclude: ['reviewImageCounter']
-      },
-      include: [{
-        model: User,
-        attributes: ['id', 'firstName', 'lastName']
-      },
-    {   model: Spot,
-        attributes: ['id', 'ownerId', 'address','city', 'state', 'country', 'lat', 'lng', 'name', 'price', 'previewImage' ]
-    }, {
-        model: ReviewImage,
-        attributes: ['id', 'url']
-    }]
-    })
-    res.json({Reviews:reviews})
-  })
-
-router.get('/:userId/bookings', async (req, res) => {
-  const userId = req.params.userId;
-
-  if(req.user.id != userId) {
-    return res.status(401).json({
-      message: "Authentication required"
-    })
-  };
+router.get('/:userId/bookings', requireAuth, async (req, res) => {
 
   const bookings = await Booking.findAll({
     where: {

@@ -3,24 +3,49 @@ const { Spot } = require('../../db/models');
 const { ReviewImage } = require('../../db/models');
 const { User } = require('../../db/models');
 const { Review } = require('../../db/models');
+const { requireAuth } = require('../../utils/auth');
 const router = express.Router();
 
-router.post('/:reviewId/addImg', async (req, res) => {
+router.get('/current', requireAuth, async (req,res) => {
+  const reviews = await Review.findAll({
+      where: {
+        userId: req.user.id
+      },
+      attributes: {
+        exclude: ['reviewImageCounter']
+      },
+      include: [{
+        model: User,
+        attributes: ['id', 'firstName', 'lastName']
+      },
+    {   model: Spot,
+        attributes: ['id', 'ownerId', 'address','city', 'state', 'country', 'lat', 'lng', 'name', 'price', 'previewImage' ]
+    }, {
+        model: ReviewImage,
+        attributes: ['id', 'url']
+    }]
+    })
+    res.json({Reviews:reviews})
+  })
+
+
+
+router.post('/:reviewId/addImg', requireAuth, async (req, res) => {
     const {url} = req.body;
     const {reviewId} = req.params;
     const id = parseInt(reviewId);
     const review = await Review.findByPk(reviewId)
 
-    if(req.user.id != review.userId) {
-        return res.status(401).json({
-          message: "Authentication required"
-        })
-      }
-
     if(!review) { res.status(404).json({
           message:"Review couldn't be found"
       })
     }
+    if(req.user.id != review.userId) {
+        return res.status(403).json({
+          message: "Forbidden"
+        })
+      }
+
 
     if(review.reviewImageCounter >= 10) {
         return res.status(403).json({
@@ -51,7 +76,7 @@ router.post('/:reviewId/addImg', async (req, res) => {
  
 });
 
-router.put('/:reviewId/edit', async (req, res) => {
+router.put('/:reviewId', requireAuth, async (req, res) => {
     const reviewId = req.params.reviewId;
     const {review, stars} = req.body
     const id = parseInt(reviewId);
@@ -63,8 +88,8 @@ router.put('/:reviewId/edit', async (req, res) => {
        })
     }
     if(req.user.id != theReviewed.userId) {
-        return res.status(401).json({
-          message: "Authentication required"
+        return res.status(403).json({
+          message: "Forbidden"
         })
       }
 
@@ -100,7 +125,7 @@ router.put('/:reviewId/edit', async (req, res) => {
 
 });
 
-router.delete('/:reviewId/delete', async (req, res) => {
+router.delete('/:reviewId', requireAuth, async (req, res) => {
     const reviewId = req.params.reviewId;
     const review = await Review.findByPk(reviewId)
     
@@ -111,14 +136,8 @@ router.delete('/:reviewId/delete', async (req, res) => {
     };
 
     if(req.user.id != review.userId) {
-        return res.status(401).json({
-          message: "Authentication required"
-        })
-      }
-
-    if(req.user.id != review.userId) {
-        return res.status(401).json({
-          message: "Authentication required"
+        return res.status(403).json({
+          message: "Forbidden"
         })
       }
 
@@ -137,7 +156,8 @@ router.delete('/:reviewId/delete', async (req, res) => {
 router.delete('/:reviewId/reviewImages/:imageId', async (req, res) => {
     const imageId = req.params.imageId;
     const reviewImage = await ReviewImage.findByPk(imageId)
-    const review = await Review.findByPk(reviewImage.reviewId);
+    const reviewId = req.params.reviewId
+    const review = await Review.findByPk(reviewId);
     
 
     if(!reviewImage) {
@@ -148,7 +168,7 @@ router.delete('/:reviewId/reviewImages/:imageId', async (req, res) => {
 
     if(req.user.id != review.userId) {
         return res.status(401).json({
-          message: "Authentication required"
+          message: "Forbidden"
         })
       }
 
@@ -162,13 +182,6 @@ router.delete('/:reviewId/reviewImages/:imageId', async (req, res) => {
         message: "Successfully deleted"
     })
 });
-
-
-
-
-
-
-
 
 
 module.exports = router;
