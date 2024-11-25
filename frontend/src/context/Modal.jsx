@@ -23,7 +23,8 @@ export function ModalProvider({ children }) {
     modalRef,
     modalContent,
     setModalContent,
-    setOnModalClose
+    setOnModalClose, 
+    closeModal
   };
 
   return (
