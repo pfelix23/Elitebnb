@@ -29,10 +29,6 @@ const { User } = require('../../db/models');
 
 const { requireAuth } = require('../../utils/auth.js');
 
-router.post('/test', (req, res) => {
-  res.json({ requestBody: req.body });
-});
-
 router.get(
   '/require-auth',
   requireAuth,
