@@ -1,5 +1,6 @@
 .profile-dropdown {
-    
+    display: inline;
+   
 }
 
 .profile-dropdown.hidden {
