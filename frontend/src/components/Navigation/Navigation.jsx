@@ -74,13 +74,13 @@ function Navigation({ isLoaded }) {
           </button>
           {dropdownVisible && (
             <ul className="dropdown-menu">
-              <li>
+              {!sessionUser && (
+                <>
+                <li>
                 <NavLink to="/" className="dropdown-link">
                   Home
                 </NavLink>
               </li>
-              {!sessionUser && (
-                <>
                   <li>
                     <OpenModalButton
                       buttonText="Log In"
@@ -93,6 +93,12 @@ function Navigation({ isLoaded }) {
                       modalComponent={<SignupFormModal />}
                     />
                   </li>
+                </>
+              )}
+              {sessionUser && (
+                <>
+                <li className='nav-buttons'>{sessionLinks}</li>
+                
                 </>
               )}
             </ul>
