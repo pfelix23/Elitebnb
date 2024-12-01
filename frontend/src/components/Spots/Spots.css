@@ -1,0 +1,54 @@
+.Spots {
+    width: 100%;
+    height: 275px;
+    border-radius: 10%;
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Spots:hover {
+    cursor: pointer;
+}
+.picture-section {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+  }
+  .spot-card {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center; 
+    width: 100%; 
+  }
+
+  .spot-section {
+    width: 23%; 
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center; 
+  }
+ 
+   .spot-details {
+    margin-top: 10px; 
+    display: flex;
+    justify-content: space-between; 
+    flex-direction: row;
+    width: 98%;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+  } 
+
+  .spot-price {
+    width: 98%;
+    display: flex;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+  }
+

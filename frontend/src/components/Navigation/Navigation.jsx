@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton/OpenModalButton';
@@ -8,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import './Navigation.css';
 import { PiUserFill } from "react-icons/pi";
-import { CgMenu } from "react-icons/cg";
+import { AiOutlineMenu } from "react-icons/ai";
+
 
 
 function Navigation({ isLoaded }) {
@@ -31,81 +31,60 @@ function Navigation({ isLoaded }) {
     };
     
     document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
+    
+    return () => document.removeEventListener('click', handleClickOutside);
+    
   }, []);
 
   let sessionLinks;
   if(sessionUser) {
     sessionLinks = (
-     <li>
+     <div>
       <ProfileButton user={sessionUser} />
-     </li>
+     </div>
     );
-  } else {
-    sessionLinks = (
-      <>
-      <li>
-        <OpenModalButton
-        buttonText="Log In"
-        modalComponent={<LoginFormModal />}
-        />
-      </li>
-      <li>
-        <OpenModalButton
-        buttonText="Sign Up"
-        modalComponent={<SignupFormModal />}
-        />
-      </li>
-      </>
-    );
-  }
+   } 
 
   return (
     <div className='divvy'>
-      <img onClick={() => navigate('/')} className='logo' src="/Elite-BNBStays.jpg" alt="Elitebnb"/>
-      <ul className='nav-ul'>
-        <li className='nav-item' ref={dropdownRef}>
+      <img onClick={() => navigate('/')} className='logo' src="/Elite-BNBStays.png" alt="Elitebnb"/>
+      <div className='nav-ul'>
+        <div className='nav-item' ref={dropdownRef}>
           <button onClick={toggleDropdown} className="dropdown-button">
-            <CgMenu className='cgmenu' />
+            <AiOutlineMenu className='cgmenu' />
             <PiUserFill className='faUser'/>
           
           </button>
           {dropdownVisible && (
-            <ul className="dropdown-menu">
+            <div className="dropdown-menu">
               {!sessionUser && (
-                <>
-                <li>
-                <NavLink to="/" className="dropdown-link">
-                  Home
-                </NavLink>
-              </li>
-                  <li>
-                    <OpenModalButton
-                      buttonText="Log In"
-                      modalComponent={<LoginFormModal />}
-                    />
-                  </li>
-                  <li>
+                <div >
+                  <div className='dropdown-modal'>
                     <OpenModalButton
                       buttonText="Sign Up"
                       modalComponent={<SignupFormModal />}
                     />
-                  </li>
-                </>
+                  </div>
+                  <div className='dropdown-modal2'>
+                    <OpenModalButton 
+                      buttonText="Log In"
+                      modalComponent={<LoginFormModal />}
+
+                    />
+                  </div>
+                </div>
               )}
               {sessionUser && (
                 <>
-                <li className='nav-buttons'>{sessionLinks}</li>
+                <div className='nav-buttons'>{sessionLinks}</div>
                 
                 </>
               )}
-            </ul>
+            </div>
           )}
-        </li>
-        <li className='nav-buttons'>{isLoaded}</li>
-      </ul>
+        </div>
+        <nav className='nav-buttons2'>{isLoaded}</nav>
+      </div>
     </div>
   );
 }

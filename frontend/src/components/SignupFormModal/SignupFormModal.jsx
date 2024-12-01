@@ -54,7 +54,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p style={{color:'red'}}>{errors.email}</p>}
         <label>
           Username
           <input
@@ -64,7 +64,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
+        {errors.username && <p style={{color:'red'}}>{errors.username}</p>}
         <label>
           First Name
           <input
@@ -74,7 +74,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.firstName && <p>{errors.firstName}</p>}
+        {errors.firstName && <p style={{color:'red'}}>{errors.firstName}</p>}
         <label>
           Last Name
           <input
@@ -84,7 +84,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.lastName && <p>{errors.lastName}</p>}
+        {errors.lastName && <p style={{color:'red'}}>{errors.lastName}</p>}
         <label>
           Password
           <input
@@ -94,7 +94,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
+        {errors.password && <p style={{color:'red'}}>{errors.password}</p>}
         <label>
           Confirm Password
           <input
@@ -104,8 +104,11 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        {errors.confirmPassword && <p style={{color:'red'}}>{errors.confirmPassword}</p>}
+        <button 
+        type="submit"
+        disabled={firstName.length === 0 || lastName.length === 0 || password.length === 0 || confirmPassword.length === 0 || username.length < 4 || password.length < 6}
+        >Sign Up</button>
       </form>
     </>
   );
