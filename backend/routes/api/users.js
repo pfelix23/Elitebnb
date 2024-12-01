@@ -48,7 +48,8 @@ router.post(
           email: "Invalid email",
           username: "Username is required",
           firstName: "First Name is required",
-          lastName: "Last Name is required"
+          lastName: "Last Name is required",
+          password: "Password must be 6 characters or more."
          }
        })
       }

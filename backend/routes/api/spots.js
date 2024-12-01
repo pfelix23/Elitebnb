@@ -404,6 +404,30 @@ router.delete('/:spotId/spotImages/:imageId', requireAuth, async (req, res) => {
     })
 })
 
+router.get('/:spotId/spotImages/:imageId', requireAuth, async (req, res) => {
+    const imageId = req.params.imageId;
+    const image = await SpotImage.findByPk(imageId)
+    const spotId = req.params.spotId;
+    const spot = await Spot.findByPk(spotId)
+
+    if(!image) {
+       return res.status(404).json({
+            message: "Spot Image couldn't be found"
+        })
+    };
+
+    if(req.user.id != spot.ownerId) {
+        return res.status(403).json({
+          message: "Forbidden"
+        })
+      }
+
+
+    return res.json({
+        Image: image
+    })
+})
+
 router.get('/', async (req, res) => {
     let {page , size  , minLat, maxLat, minLng, maxLng, minPrice, maxPrice} = req.query;
     
@@ -464,7 +488,8 @@ if(minPrice || maxPrice) {
         offset: size * (page-1),
         attributes: {
             exclude: ['numReviews']
-        }
+        },
+        raw: true
     })
 
     res.json({

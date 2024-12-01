@@ -35,7 +35,7 @@ function Spots() {
         <section className='picture-section'>
           <div className="spot-card">
             {spots.map((spot)=> {
-               return( <picture onClick={() => navigate(`/${spot.id}`)} className='spot-section' key={spot.id}>
+               return( <picture onClick={() => navigate(`/spots/${spot.id}`)} className='spot-section' key={spot.id}>
                     <img className='Spots' src={`http://localhost:8000/public${spot.previewImage}`}
                     alt={spot.name}
                     title={spot.name} />

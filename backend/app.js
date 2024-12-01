@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path')
 require('express-async-errors');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -10,10 +11,12 @@ const { environment } = require('./config');
 const isProduction = environment === 'production';
 
 const app = express();
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
+
 
 // Security Middleware
 if (!isProduction) {

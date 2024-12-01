@@ -31,6 +31,24 @@ const reviews = [
     spotId: 5, 
     review: 'Loved the place, but it was a bit overpriced for what it offered.',
     stars: 4
+  },
+  {
+    userId: 6,
+    spotId: 5,
+    review: 'Great spot, very cozy and well-located. The price was a little high, but the experience made it worthwhile.',
+    stars: 4
+  },
+  {
+    userId: 7,
+    spotId: 5,
+    review: 'Had a wonderful stay! The location was perfect, but I feel like the amenities could have been better for the price.',
+    stars: 3
+  },
+  {
+    userId: 8,
+    spotId: 5,
+    review: 'Fantastic experience overall, but the cost felt a bit steep for what you get. Still, would recommend!',
+    stars: 4
   }
 ];
 

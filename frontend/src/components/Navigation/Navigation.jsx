@@ -52,7 +52,7 @@ function Navigation({ isLoaded }) {
         <div className='nav-item' ref={dropdownRef}>
           <button onClick={toggleDropdown} className="dropdown-button">
             <AiOutlineMenu className='cgmenu' />
-            <PiUserFill className='faUser'/>
+            <PiUserFill className='PiUserFill'/>
           
           </button>
           {dropdownVisible && (

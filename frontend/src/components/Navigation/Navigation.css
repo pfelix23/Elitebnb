@@ -13,7 +13,7 @@
 
 .logo{
     height: 64px;
-    width: 118px;
+    width: 110px;
     background-color: white;
     
     
@@ -92,7 +92,7 @@
     margin-top: 5px;
 }
 
-.faUser {
+.PiUserFill {
     border-radius: 50%;
     height: 13px;
     width: 13px;
