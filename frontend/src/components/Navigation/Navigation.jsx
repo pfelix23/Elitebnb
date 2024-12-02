@@ -81,7 +81,7 @@ function Navigation({ isLoaded }) {
               )}
             </div>
           )} {sessionUser && (
-            <div className='new-spot' onClick={() => navigate('/spots/create')}><h3>Create a New Spot </h3></div>
+            <div className='new-spot' onClick={() => navigate('/spots/create')}><h3>Create a New Spot</h3></div>
           )}
         </div>
         <nav className='nav-buttons2'>{isLoaded}</nav>

@@ -1,7 +1,7 @@
 .create-a-spot-input {
     width: 90%;
     background-color: rgb(212, 232, 245);
-    height: 20px;
+    height: 2.5vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
 }
 
@@ -33,7 +33,7 @@
 
 .geographic-location-spot-input {
     background-color: rgb(212, 232, 245);
-    height: 20px;
+    height: 2.5vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
     width: 45%;
 
@@ -41,21 +41,22 @@
 
 .local-location-spot-input {
     background-color: rgb(212, 232, 245);
-    height: 20px;
+    height: 2.5vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
     width: 9vw;
     margin-top: 2px;
     border: solid black 2px;
-    margin-left: 20px;
+    margin-left: 14%;
 }
 
 .local-location-city-spot-input {
     background-color: rgb(212, 232, 245);
-    height: 20px;
+    height: 2.5vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
-    width: 12vw;
+    width: 11.5vw;
     margin-top: 2px;
-    border: solid black 2px;    
+    border: solid black 2px;  
+    margin-left: -1%;  
 }
 .geographic-container {
     display: flex;    
@@ -71,7 +72,7 @@
 
 .geographic-location-longitude-spot-input {
     background-color: rgb(212, 232, 245);
-    height: 20px;
+    height: 2.5vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
     width: 10vw;
     margin-top: 2px;
@@ -80,7 +81,7 @@
 
 .geographic-location-spot-input {
     background-color: rgb(212, 232, 245);
-    height: 20px;
+    height: 2.5vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
     width: 10vw;
     margin-top: 2px;
@@ -126,8 +127,8 @@ label, .p {
 }
 
 .guests {
-    margin-bottom: -10px;
-    margin-left: -35px;
+    margin-bottom: -1%;
+    margin-left: -3%;
     font-family: "Sour Gummy";
 }
 .features {
@@ -168,11 +169,11 @@ label, .p {
     justify-content: center;
     align-items: center;
     width: 6vw;
-    margin-left: 16px;
+    margin-left: 1%;
     border-radius: 0%;
     background-color: rgba(194, 19, 19, 0.719);
     color: white;
-    height: 20px;
+    height: 2.5vh;
     font-weight: bolder;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(19, 18, 18) 0px 0px 0px 3px;
 
