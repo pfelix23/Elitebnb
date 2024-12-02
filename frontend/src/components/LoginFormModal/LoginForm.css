@@ -1,0 +1,83 @@
+.login-form {
+    height: 35vh;
+    width: 28vw;
+    border-radius: 50px;
+    
+}
+
+.login-container {
+    border-radius: 50px;
+}
+
+.username-input {
+    width: 90%;
+    background-color: rgb(212, 232, 245);
+    margin-left: 17px;
+    height: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+}
+
+.password-input {
+    width: 90%;
+    background-color: rgb(212, 232, 245);
+    margin-left: 17px;
+    height: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+}
+
+.login-button {
+    width: 91%;
+    height: 100%;
+    box-shadow: black 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    background-color: rgb(202, 70, 70);
+    color: white;
+    font-family: 'Roboto';
+}
+
+.login-button:not(:disabled) {
+    cursor: pointer;
+}
+
+.login-button:disabled {
+    width: 91%;
+    height: 100%;
+    box-shadow: grey 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    background-color: white;
+    color: grey;
+    font-family: 'Roboto';
+}
+
+.login-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+}
+.demo-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto";
+    color: rgb(38, 101, 126);
+    text-decoration: underline;
+    height: 20px;
+}
+
+.demo-user2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+}
+
+.demo-user:hover {
+    cursor: pointer;
+}
+
+.login-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto';
+}
+

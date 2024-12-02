@@ -60,6 +60,13 @@ const users = [
     email: 'bruce.wayne@example.com',
     hashedPassword: bcrypt.hashSync('password123', 10)
   },
+  {
+    username: 'demo_user',
+    firstName: 'Demo',
+    lastName: 'User',
+    email: 'demo@user.com',
+    hashedPassword: bcrypt.hashSync('password', 10)
+  }
 ];
 
 /** @type {import('sequelize-cli').Migration} */

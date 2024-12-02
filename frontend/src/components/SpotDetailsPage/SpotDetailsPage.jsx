@@ -1,13 +1,21 @@
 import { IoStarSharp } from "react-icons/io5";
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
+import { LuDot } from "react-icons/lu";
 import '../Spots/Spots.css'
 
 function SpotDetails() {
     const [spot, setSpot] = useState({});     
     const [error, setError] = useState(null);   
-    const [reviews, setReviews] = useState([])
+    const [reviews, setReviews] = useState(null)
     const {spotId} = useParams() 
+
+    const sessionUser = useSelector((state) => state.session.user);
+
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
 
     useEffect(() => {
         fetch(`http://localhost:8000/api/spots/${spotId}/reviews`)
@@ -17,8 +25,10 @@ function SpotDetails() {
             }
             return res.json();
           }).then((data) => {
-            setReviews(data.Reviews)
+            console.log(data)
+            setReviews(data)
           })}, [spotId])
+         
 
     useEffect(() => {
         fetch(`http://localhost:8000/api/spots/${spotId}`)
@@ -54,13 +64,15 @@ function SpotDetails() {
       if (!spot) {
         return <div>Loading...</div>;
       }
-      console.log(reviews)
     
       return (
         <div className="root-details">
+          <div style={{marginLeft:'6%'}}>
+          <h1>{spot.name}</h1>
+          <h3>{spot.city}, {spot.state}, {spot.country}</h3>
+          </div>
           <section className="picture-section2">
             <div className="spot-card2">
-              {/* Display the first image */}
               {spot.firstImage && spot.firstImage.length > 0 && (
                 <picture className="first-image">
                   <img
@@ -70,17 +82,15 @@ function SpotDetails() {
                   />
                 </picture>
               )}
-    
-              {/* Display the second to fourth images in a grid next to the first image */}
               {spot.otherImages && spot.otherImages.length > 0 && (
                 <div className="image-grid">
-                  {spot.otherImages.map((spotImage, index) => (
+                  {spot.otherImages.map((spotImage) => (
                     <picture
                       className="spot-section2"
                       key={spotImage.id}
                     >
                       <img
-                        className="spot-addPics smaller-image"
+                        className="spot-addPics2 smaller-image"
                         src={`http://localhost:8000/public/${spotImage.url}`}
                         alt={spot.name}
                         title={spot.name}
@@ -91,15 +101,24 @@ function SpotDetails() {
               )}
             </div>
           </section>
-          <div className="info-box"><h2>Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2><div className="spot-info"><h2>${spot.price} night</h2> <h3><IoStarSharp />{spot.avgRating} {spot.numReviews} reviews</h3> </div></div>
-          <div className="button-box"><p>{spot.description}</p><div className="box-of-button"><button className="reserve">Reserve</button></div></div>
-          <div>{reviews.map((review)=> {
-               return( <section className="review-section" key={review.id}>
-                    {review.review && <p className="review-text">{review.review}</p>}
-                    {review.User && <p className="review-user">Reviewed by: {review.User}</p>}
-                </section>
-                )
-            })}</div>
+          <div className="info-box"><h2>Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2><div className="spot-info"><h2>${spot.price} night</h2> <h3><IoStarSharp /> {spot.avgRating}<LuDot />{spot.numReviews} reviews</h3> </div></div>
+          <div className="button-box"><p>{spot.description}</p><div className="box-of-button"><button className="reserve" onClick={() => alert("Feature Coming Soon")}>Reserve</button></div></div>
+          
+          <div>
+            <h2 className="review-head"><IoStarSharp  />{spot.avgRating}<LuDot />{spot.numReviews} reviews</h2> 
+            {sessionUser && sessionUser.id !== spot.id && (<button className="review-button">Post Your Review</button>)}
+        {reviews && reviews.length > 0 ? (
+          reviews.map((review) => (
+            <section className="review-section" key={review.id}>
+              {review.User && (<h3 className="review-user"> {review.User.firstName}</h3>)}
+              {review.createdAt && (<h3>{monthNames[(review.createdAt.split('-')[1])-1]} {review.createdAt.split('-')[0]}</h3>)}
+              {review.review && (<p className="review-text">{review.review}</p>)}
+            </section>
+          ))
+        ) : (
+          <h2 style={{marginLeft: '5%', fontFamily: 'Roboto'}}>Be the first to post a review!</h2>
+        )}
+      </div>
         </div>
       );
     }

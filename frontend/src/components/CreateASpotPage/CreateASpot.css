@@ -1,0 +1,190 @@
+.create-a-spot-input {
+    width: 90%;
+    background-color: rgb(212, 232, 245);
+    height: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+}
+
+.create-a-spot-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   
+    
+}
+
+.create-a-spot-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 25vw;
+}
+
+#describe {
+    width: 95%;
+    height: 20vh;
+    background-color: rgb(212, 232, 245);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+
+}
+
+
+.geographic-location-spot-input {
+    background-color: rgb(212, 232, 245);
+    height: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+    width: 45%;
+
+}
+
+.local-location-spot-input {
+    background-color: rgb(212, 232, 245);
+    height: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+    width: 9vw;
+    margin-top: 2px;
+    border: solid black 2px;
+    margin-left: 20px;
+}
+
+.local-location-city-spot-input {
+    background-color: rgb(212, 232, 245);
+    height: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+    width: 12vw;
+    margin-top: 2px;
+    border: solid black 2px;    
+}
+.geographic-container {
+    display: flex;    
+    justify-content: space-between;
+    width: 23vw;
+    gap: 10px;
+    margin-top: 10px;
+    padding-bottom: 20px;
+    border-bottom: solid black 2px;
+    border-radius: -3px;
+
+}
+
+.geographic-location-longitude-spot-input {
+    background-color: rgb(212, 232, 245);
+    height: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+    width: 10vw;
+    margin-top: 2px;
+    border: solid black 2px;  
+}
+
+.geographic-location-spot-input {
+    background-color: rgb(212, 232, 245);
+    height: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+    width: 10vw;
+    margin-top: 2px;
+    border: solid black 2px;
+    margin-left: 15px;
+}
+
+.latitude {
+    padding-left: 15px; 
+}
+
+.local-container {
+    display: flex;    
+    justify-content: space-between;
+    width: 90%;
+    gap: 10px;
+    margin-top: 10px;
+}
+.local-container div {
+    width: 48%; 
+}
+
+label, .p {
+    display: block; 
+    margin-bottom: 5px; 
+    font-weight: bold;
+    font-family: "Sour Gummy";
+  }
+
+.states {
+    padding-left: 19px;
+    font-family: "Sour Gummy";
+}
+
+.address {
+    margin-left: -250px;
+    font-family: "Sour Gummy";
+}
+
+.country {
+    margin-left: -293px;
+    font-family: "Sour Gummy";
+}
+
+.guests {
+    margin-bottom: -10px;
+    margin-left: -35px;
+    font-family: "Sour Gummy";
+}
+.features {
+    font-family: "Sour Gummy";
+    margin-left: 8px;
+    width: 24vw;
+}
+
+.new-tile-container {
+    border-top: solid black 2px;
+    margin-top: 25px;
+    width: 95%;
+    border-radius: 3px;
+}
+.new-tile {
+    display: flex;
+    justify-content: flex-start;
+    font-family: "Sour Gummy";
+}
+
+.new-tile2 {
+    display: flex;
+    justify-content: flex-start;
+    font-family: "Sour Gummy";
+    width: 24vw;
+}
+
+.attention {
+    display: flex;
+    justify-content: flex-start;
+    font-family: "Sour Gummy";
+    margin-top: -11px;
+    margin-left: 8px;
+}
+
+.create-a-spot-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6vw;
+    margin-left: 16px;
+    border-radius: 0%;
+    background-color: rgba(194, 19, 19, 0.719);
+    color: white;
+    height: 20px;
+    font-weight: bolder;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(19, 18, 18) 0px 0px 0px 3px;
+
+  }
+  .create-a-spot-button:hover {
+    cursor: pointer;
+  }
+
+  .create-a-spot-text {
+    font-family: "Sour Gummy";
+    display: flex;
+    justify-content: flex-start;
+    width: 23vw;
+    margin-bottom: -1px;
+  }

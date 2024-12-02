@@ -24,9 +24,12 @@
 }
 
 
-.divvy {
+.root-div {
     display: flex;
     justify-content: space-between;
+    border-bottom: rgb(167, 164, 164) solid 3px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
     
 }
 
@@ -41,6 +44,11 @@
     background-color: rgb(243, 243, 243);
 }
 
+.dropdown-menu {
+    margin-top: 5px;
+    position: absolute; 
+    width: 120px; 
+}
 .dropdown-button:hover {
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
@@ -55,7 +63,9 @@
     border-top: solid 2px black;
     border-right: solid 2px black;
     border-left: solid 2px black;
-    width: 120px;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
 }
 
 .dropdown-modal:hover {
@@ -70,7 +80,9 @@
     border-bottom: solid 2px black;
     border-right: solid 2px black;
     border-left: solid 2px black;
-    width: 120px;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
 }
 
 .dropdown-modal2:hover {
@@ -83,12 +95,11 @@
 
 .nav-buttons {
     margin-left: -100px;
-    /* border: solid black 2px; */
     padding: 2px;
     position: absolute;
     z-index: 10;
     background-color: white;
-    border-radius: 10%;
+    border: solid black 3px;
     margin-top: 5px;
 }
 
@@ -129,10 +140,24 @@
     width: fit-content;
     word-break: break-word;
     border: 0;
-    margin-left: 55px;
-    margin-top: 3px;
+    margin-left: 42px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 40px;
    
 }
+
+.new-spot {
+    margin-left: -185px;
+    margin-top: -52px;
+    font-family: "Sour Gummy";
+    font-weight: 100;
+    color: rgb(38, 101, 126);
+  }
+
+  .new-spot:hover {
+    cursor: pointer;
+  }
 
 
 

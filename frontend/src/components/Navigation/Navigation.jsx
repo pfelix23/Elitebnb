@@ -46,7 +46,7 @@ function Navigation({ isLoaded }) {
    } 
 
   return (
-    <div className='divvy'>
+    <div className='root-div'>
       <img onClick={() => navigate('/')} className='logo' src="/Elite-BNBStays.png" alt="Elitebnb"/>
       <div className='nav-ul'>
         <div className='nav-item' ref={dropdownRef}>
@@ -77,10 +77,11 @@ function Navigation({ isLoaded }) {
               {sessionUser && (
                 <>
                 <div className='nav-buttons'>{sessionLinks}</div>
-                
                 </>
               )}
             </div>
+          )} {sessionUser && (
+            <div className='new-spot' onClick={() => navigate('/spots/create')}><h3>Create a New Spot </h3></div>
           )}
         </div>
         <nav className='nav-buttons2'>{isLoaded}</nav>
