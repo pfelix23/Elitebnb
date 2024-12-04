@@ -42,7 +42,7 @@ function ReviewFormModal({spotId}) {
         ></textarea>
         </div>
         <div className='star-container'>
-            <ul class="rate-area">
+            <ul className="rate-area">
                 <input type="radio" id="5-star" name="crating" value="5" onClick={(e) => setStars(parseInt(e.target.value))}/>
                     <label for="5-star" title="Amazing">5 stars</label>
                                     <input type="radio" id="4-star" name="crating" value="4" onClick={(e) => setStars(parseInt(e.target.value))}/>

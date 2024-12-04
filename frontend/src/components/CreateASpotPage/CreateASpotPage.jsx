@@ -1,14 +1,16 @@
-import { useState} from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import * as spotsActions from '../../store/spots';
 import './CreateASpot.css'
+import { update } from '../../store/spots';
 
 function CreateASpot() {
   const dispatch = useDispatch()
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+  const [stated, setStated] = useState("");
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   const [description, setDescription] = useState("");
@@ -17,11 +19,35 @@ function CreateASpot() {
   const [previewImage, setPreviewImage] = useState("");
   const [image, setImage] = useState("");
   const [errors, setErrors] = useState({});
+  const { state } = useLocation();
+  const [spotData, setSpotData] = useState({
+    address: '',
+    city: '',
+    state: '',
+    country: '',
+    lat: '',
+    lng: '',
+    name: '',
+    description: '',
+    price: ''
+  });
 
+  
+  useEffect(() => {
+    if (state && state.spot) {
+      setSpotData({
+        ...state.spot
+      });
+    }
+  }, [state]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors({}); 
+    setErrors({});
+    if (state && state.spot) {
+    
+      dispatch(update(state.spot.id, spotData));
+    } else 
   
     return dispatch(
       spotsActions.create({
@@ -37,7 +63,7 @@ function CreateASpot() {
       }),
       setAddress(''),
       setCity(''),
-      setState (''),
+      setStated (''),
       setCountry (''),
       setLat (''),
       setLng (''),
@@ -106,8 +132,8 @@ function CreateASpot() {
                   className='local-location-spot-input'
                   type="text"
                   placeholder='State'
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
+                  value={stated}
+                  onChange={(e) => setStated(e.target.value)}
                   required
                   id="state"                  
                 />

@@ -28,7 +28,6 @@ function SpotDetails() {
             }
             return res.json();
           }).then((data) => {
-            console.log(data)
             setReviews(data)
           })}, [spotId])
          
@@ -123,7 +122,7 @@ function SpotDetails() {
               {review.User && (<h3 className="review-user"> {review.User.firstName}</h3>)}
               {review.createdAt && (<h3>{monthNames[(review.createdAt.split('-')[1])-1]} {review.createdAt.split('-')[0]}</h3>)}
               {review.review && (<p className="review-text">{review.review}</p>)}
-              {sessionUser && review.userId === sessionUser?.id && (<button className="delete-button">Delete</button>)}
+              {sessionUser && review.userId === sessionUser?.id && (<button className="detail-delete-button">Delete</button>)}
             </section>
           ))
         ) : (

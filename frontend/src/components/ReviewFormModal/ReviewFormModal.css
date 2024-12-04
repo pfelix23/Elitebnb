@@ -50,17 +50,6 @@
   width: 100%;
 }
 
-.star {
-  width: 2vw;
-  height: 3vh;
-  color: rgb(184, 184, 184);
-
-}
-
-.star:hover {
-  color: black;
-  cursor: pointer;
-}
 
 .rate-area {
   float:left;

@@ -114,7 +114,7 @@ export const getSpots = (userId) => async (dispatch) => {
     return response;
   };
 
-const initialState = { spot: null };
+const initialState = { spot: null, spots: [], reviews: [] };
 
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
