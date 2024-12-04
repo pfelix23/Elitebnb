@@ -140,11 +140,13 @@
     width: fit-content;
     word-break: break-word;
     border: 0;
-    margin-left: 42px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    height: 40px;
-   
+    margin-left: 23%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    height: 6.5vh;
+    display:flex; 
+    justify-content:center;
+    align-items: center;   
 }
 
 .new-spot {
@@ -159,5 +161,16 @@
     cursor: pointer;
   }
 
+  .manage-spots {
+    height: 12%; 
+    font-family: 'Sour Gummy';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .manage-spots:hover {
+    cursor: pointer;
+  }
 
 

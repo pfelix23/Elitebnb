@@ -262,6 +262,24 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
         }
     })
 
+    const allReviews = await Review.findAll({
+        where: { spotId: spotId },
+        attributes: [[sequelize.fn('avg', sequelize.col('stars')), 'avgRating']]
+    });
+
+    
+    const avgRating = allReviews[0].get('avgRating');
+
+   
+    await Spot.update(
+        {
+            avgRating: avgRating
+        },
+        {
+            where: { id: spotId }
+        }
+    );
+
 
 
     res.status(201).json(newReview)
@@ -499,8 +517,9 @@ if(minPrice || maxPrice) {
     })
 } )
 
-router.get('/:spotId/current', requireAuth, async (req, res) => {
+router.get('/:userId/current', requireAuth, async (req, res) => {
     const ownerId = req.user.id
+    console.log(ownerId)
     
     const spots = await Spot.findAll({
       where: {

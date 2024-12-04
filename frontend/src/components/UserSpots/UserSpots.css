@@ -1,0 +1,65 @@
+.delete-button-manage-spots {
+    font-family: "Sour Gummy", sans-serif;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    border-radius: 0%;
+    background-color: grey;
+    color: white;
+    height: 3vh;
+    font-weight: bolder;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, black 0px 0px 0px 3px;
+    
+  }
+  
+  .delete-button-manage-spots:hover {
+    cursor: pointer;
+  }
+
+  .update-button-manage-spots {
+    font-family: "Sour Gummy", sans-serif;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    border-radius: 0%;
+    background-color: grey;
+    color: white;
+    height: 3vh;
+    font-weight: bolder;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, black 0px 0px 0px 3px;
+    margin-right: 5%;
+   
+  }
+  
+  .update-button-manage-spots:hover {
+    cursor: pointer;
+  }
+
+  .manage-spots-button-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 22vw;
+
+  }
+
+  .create-a-spot-manage-spots {
+    font-family: "Sour Gummy", sans-serif;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    border-radius: 0%;
+    background-color: grey;
+    color: white;
+    height: 3vh;
+    font-weight: bolder;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, black 0px 0px 0px 3px;
+
+  }
+
+  .create-a-spot-manage-spots:hover {
+    cursor: pointer;
+  }

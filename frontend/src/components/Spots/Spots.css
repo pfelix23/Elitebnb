@@ -12,8 +12,8 @@
   width: 44vw;  
   max-width: 50vw;  
   height: 66vh;
-  border-top-left-radius: 10%;
-  border-bottom-left-radius: 10%;
+  border-top-left-radius: 5%;
+  border-bottom-left-radius: 5%;
   margin-left: 11%;
   margin-bottom: 20px;
 }
@@ -124,7 +124,7 @@
     border-right: solid black 3px;
     display: flex;
     justify-content: space-evenly;
-    width: 20vw;
+    width: 21vw;
     margin-top: 20px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -136,7 +136,7 @@
     justify-content: center;
     align-items: center;
     width: 18vw;
-    margin-left: 16px;
+    margin-left: 7.5%;
     border-radius: 0%;
     background-color: rgba(194, 19, 19, 0.719);
     color: white;
@@ -171,7 +171,7 @@
   border-bottom: solid black  3px;
   border-left: solid black 3px;
   border-right: solid black 3px;
-  width: 20vw;
+  width: 21vw;
   padding-bottom: 20px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -206,7 +206,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 8vw;
+  width: fit-content;
   border-radius: 0%;
   background-color: grey;
   color: white;
@@ -214,6 +214,25 @@
   font-weight: bolder;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, black 0px 0px 0px 3px;
 }
+
+.delete-button {
+  font-family: "Roboto", sans-serif;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5vw;
+  border-radius: 0%;
+  background-color: grey;
+  color: white;
+  height: 3vh;
+  font-weight: bolder;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, black 0px 0px 0px 3px;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+}
+
 
 .review-button:hover {
   cursor: pointer;

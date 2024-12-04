@@ -1,15 +1,18 @@
-import { IoStarSharp } from "react-icons/io5";
+import { ImStarFull } from "react-icons/im";
 import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import { LuDot } from "react-icons/lu";
 import '../Spots/Spots.css'
+import { useModal } from "../../context/Modal";
+import ReviewFormModal from "../ReviewFormModal/ReviewFormModal";
 
 function SpotDetails() {
     const [spot, setSpot] = useState({});     
     const [error, setError] = useState(null);   
     const [reviews, setReviews] = useState(null)
     const {spotId} = useParams() 
+    const { setModalContent, closeModal } = useModal();
 
     const sessionUser = useSelector((state) => state.session.user);
 
@@ -52,7 +55,7 @@ function SpotDetails() {
             }
           })
           .catch((error) => {
-            console.error('Error fetching spot:', error);
+            console.log('Error fetching spot:', error);
             setError(error);
           });
       }, [spotId]);
@@ -64,6 +67,12 @@ function SpotDetails() {
       if (!spot) {
         return <div>Loading...</div>;
       }
+
+      const userHasReviewed = reviews?.find((review) => review.userId === sessionUser?.id);
+
+      const openReviewForm = () => {
+        setModalContent(<ReviewFormModal spotId={spotId} closeModal={closeModal} />);
+      };
     
       return (
         <div className="root-details">
@@ -101,18 +110,20 @@ function SpotDetails() {
               )}
             </div>
           </section>
-          <div className="info-box"><h2>Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2><div className="spot-info"><h2>${spot.price} night</h2> <h3><IoStarSharp /> {spot.avgRating}<LuDot />{spot.numReviews} reviews</h3> </div></div>
+          <div className="info-box"><h2>Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2><div className="spot-info"><h2>${spot.price} night</h2> <h3><ImStarFull /> {spot.avgRating}<LuDot />{spot.numReviews === 1 ? "1 review" : `${spot.numReviews} reviews`}</h3> </div></div>
           <div className="button-box"><p>{spot.description}</p><div className="box-of-button"><button className="reserve" onClick={() => alert("Feature Coming Soon")}>Reserve</button></div></div>
           
           <div>
-            <h2 className="review-head"><IoStarSharp  />{spot.avgRating}<LuDot />{spot.numReviews} reviews</h2> 
-            {sessionUser && sessionUser.id !== spot.id && (<button className="review-button">Post Your Review</button>)}
+            <h2 className="review-head"><ImStarFull  />&nbsp;{spot.avgRating}<LuDot />{spot.numReviews === 1 ? "1 review" : `${spot.numReviews} reviews`}</h2> 
+            {sessionUser && sessionUser.id !== spot.id && !userHasReviewed && (<button className="review-button" onClick={openReviewForm}>Post Your Review</button>)}
+            
         {reviews && reviews.length > 0 ? (
           reviews.map((review) => (
             <section className="review-section" key={review.id}>
               {review.User && (<h3 className="review-user"> {review.User.firstName}</h3>)}
               {review.createdAt && (<h3>{monthNames[(review.createdAt.split('-')[1])-1]} {review.createdAt.split('-')[0]}</h3>)}
               {review.review && (<p className="review-text">{review.review}</p>)}
+              {sessionUser && review.userId === sessionUser?.id && (<button className="delete-button">Delete</button>)}
             </section>
           ))
         ) : (

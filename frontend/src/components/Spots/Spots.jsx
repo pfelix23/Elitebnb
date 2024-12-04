@@ -9,7 +9,7 @@ function Spots() {
     const navigate = useNavigate()    
     
     useEffect(() => {
-      fetch('http://localhost:8000/api/spots')  // Replace with your API URL
+      fetch('http://localhost:8000/api/spots')  
         .then((res) => {
           if (!res.ok) {
             throw new Error('Network response was not ok');
