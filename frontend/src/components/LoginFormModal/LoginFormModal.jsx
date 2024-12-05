@@ -49,7 +49,7 @@ function LoginFormModal() {
       <h1 className='login-text'>Log In</h1>
       <form onSubmit={handleSubmit} className='login-form'>
       {errors.credential && (
-          <p style={{color: 'red', marginLeft: '17px'}}>{errors.credential}</p>
+          <p style={{color: 'red', marginLeft: '4%', marginTop:'-5%', fontFamily:'Sour Gummy'}}>{errors.credential}</p>
         )}
         <label>
           <input

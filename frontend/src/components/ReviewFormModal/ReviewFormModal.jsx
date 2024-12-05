@@ -3,7 +3,6 @@ import * as spotsActions from '../../store/spots';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import './ReviewFormModal.css'
-import { useParams } from 'react-router-dom';
 
 function ReviewFormModal({spotId}) {
   const dispatch = useDispatch();

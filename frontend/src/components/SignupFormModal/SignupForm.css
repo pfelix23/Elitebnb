@@ -1,0 +1,62 @@
+.signup-form {
+    height: 42vh;
+    width: 30vw;
+    border-radius: 50px;
+    padding-bottom: 5%;
+    
+}
+
+.signup-container {
+    border-radius: 50px;
+}
+
+.signup-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    background-color: rgb(212, 232, 245);
+    margin-left: 4.1%;
+    height: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+    margin-bottom: 2.3%;
+    font-family: 'Sour Gummy';
+
+}
+
+.signup-button {
+    width: 91%;
+    height: 100%;
+    box-shadow: black 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    background-color: rgb(202, 70, 70);
+    color: white;
+    font-family: 'Sour Gummy';
+}
+
+.signup-button:not(:disabled) {
+    cursor: pointer;
+}
+
+.signup-button:disabled {
+    width: 91%;
+    height: 100%;
+    box-shadow: grey 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    background-color: white;
+    color: grey;
+    font-family: 'Sour Gummy';
+}
+
+.signup-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+}
+
+.signup-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Sour GUmmy';
+}
+

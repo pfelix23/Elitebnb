@@ -6,6 +6,7 @@ import { LuDot } from "react-icons/lu";
 import '../Spots/Spots.css'
 import { useModal } from "../../context/Modal";
 import ReviewFormModal from "../ReviewFormModal/ReviewFormModal";
+import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
 
 function SpotDetails() {
     const [spot, setSpot] = useState({});     
@@ -72,6 +73,10 @@ function SpotDetails() {
       const openReviewForm = () => {
         setModalContent(<ReviewFormModal spotId={spotId} closeModal={closeModal} />);
       };
+
+      const openDeleteForm = (reviewId) => {
+        setModalContent(<DeleteReviewModal reviewId={reviewId} closeModal={closeModal} />);
+      };
     
       return (
         <div className="root-details">
@@ -117,12 +122,12 @@ function SpotDetails() {
             {sessionUser && sessionUser.id !== spot.id && !userHasReviewed && (<button className="review-button" onClick={openReviewForm}>Post Your Review</button>)}
             
         {reviews && reviews.length > 0 ? (
-          reviews.map((review) => (
+          reviews.reverse().map((review) => (
             <section className="review-section" key={review.id}>
               {review.User && (<h3 className="review-user"> {review.User.firstName}</h3>)}
               {review.createdAt && (<h3>{monthNames[(review.createdAt.split('-')[1])-1]} {review.createdAt.split('-')[0]}</h3>)}
               {review.review && (<p className="review-text">{review.review}</p>)}
-              {sessionUser && review.userId === sessionUser?.id && (<button className="detail-delete-button">Delete</button>)}
+              {sessionUser && review.userId === sessionUser?.id && (<button className="detail-delete-button" onClick={() => openDeleteForm(review.id)}>Delete</button>)}
             </section>
           ))
         ) : (

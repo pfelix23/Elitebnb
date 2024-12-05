@@ -106,7 +106,7 @@ router.get('/:spotId', async (req, res) => {
 
   });
 
-  router.put('/:spotId', requireAuth, async (req, res) => {
+  router.put('/:spotId/update', requireAuth, async (req, res) => {
     const {address, city, state, country, lat, lng, name, description, price} = req.body
     const spotId = req.params.spotId;
     const spot = await Spot.findByPk(spotId);

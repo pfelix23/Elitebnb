@@ -1,5 +1,5 @@
 .login-form {
-    height: 35vh;
+    height: 38vh;
     width: 28vw;
     border-radius: 50px;
     
@@ -12,17 +12,19 @@
 .username-input {
     width: 90%;
     background-color: rgb(212, 232, 245);
-    margin-left: 17px;
-    height: 20px;
+    margin-left: 4%;
+    height: 2.8vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+    font-family: 'Sour Gummy';
 }
 
 .password-input {
     width: 90%;
     background-color: rgb(212, 232, 245);
-    margin-left: 17px;
-    height: 20px;
+    margin-left: 4%;
+    height: 2.8vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+    font-family: 'Sour Gummy';
 }
 
 .login-button {
@@ -51,23 +53,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 45px;
+    height: 6vh;
 }
 .demo-user {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Roboto";
+    font-family: "Sour Gummy";
     color: rgb(38, 101, 126);
-    text-decoration: underline;
-    height: 20px;
+    text-decoration: underline 2px;
+    height: 2vh;
 }
 
 .demo-user2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20px;
+    height: 2vh;
 }
 
 .demo-user:hover {
@@ -78,6 +80,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Roboto';
+    font-family: 'Sour Gummy';
 }
 

@@ -1,9 +1,11 @@
-import { useState} from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import * as spotsActions from '../../store/spots';
-import './CreateASpot.css'
+import './UpdateASpotPage.css'
+import { useParams } from 'react-router-dom';
 
-function CreateASpot() {
+function UpdateASpot() {
   const dispatch = useDispatch()
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
@@ -20,14 +22,39 @@ function CreateASpot() {
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
   const [errors, setErrors] = useState({});
+  const [spot, setSpot] = useState();
+  const spotId = useParams();
+  const [buttonNavigate, setButtonNavigate] = useState(false);
+  const navigate = useNavigate();
+  
 
-
+  useEffect(() => {
+    if(!buttonNavigate) {
+        navigate('/')
+    }
+  }, [buttonNavigate, navigate])
+  
+  useEffect(() => {
+    if(spotId) {
+        dispatch(spotsActions.getSpotById(spotId))
+        .then((data) => {
+            setSpot(data)
+        }).catch(async (res) => {
+            const data = await res.json();
+            if (data?.errors) {
+               setErrors(data.errors); 
+               console.log(data.errors)
+            } 
+          });
+    }
+  })
+  console.log(spot)
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors({}); 
-  
+    setErrors({});
+      
     return dispatch(
-      spotsActions.create({
+      spotsActions.update(spotId,{
         address,
         city,
         state,
@@ -49,33 +76,34 @@ function CreateASpot() {
       setDescription (''),
       setPrice (''),
       setPreviewImage (''),
-      setImage ('')
-      setImage1 ('')
-      setImage2 ('')
-      setImage3 ('')
+      setImage (''),
+      setImage1 (''),
+      setImage2 (''),
+      setImage3 (''),
+      console.log(spot)
      })
       .catch(async (res) => {
         const data = await res.json();
-        console.log(data)
-        if (data && data.errors) {
+        if (data?.errors) {
            setErrors(data.errors); 
+           console.log(data.errors)
         } 
       });
-      
-  };
+    };
         
       
       return (
         <div className='create-a-spot-container'>
-          <h1 className='create-a-spot-text'>Create a new Spot</h1>
+          <h1 className='create-a-spot-text'>Update your Spot</h1>
           <h2 className='guests'>Where's your place located?</h2>
           <h4 className='features'>Guests will only get your exact address once they booked a reservation</h4>
           <form onSubmit={handleSubmit} className='create-a-spot-form'>
-            <label htmlFor="country" className='country'>Country</label>
+            <label htmlFor="country" className='country'>Country </label>
             <input
               className='create-a-spot-input'
               type="text"
               placeholder='Country'
+            //   defaultValue={spot?.country}
               value={country}
               onChange={(e) => setCountry(e.target.value)}
               required
@@ -87,6 +115,7 @@ function CreateASpot() {
               className='create-a-spot-input'
               type="text"
               placeholder='Address'
+            //   defaultValue={spot.address}
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               required
@@ -99,6 +128,7 @@ function CreateASpot() {
                   className='local-location-city-spot-input'
                   type="text"
                   placeholder='City'
+                //   defaultValue={spot.city}
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   required
@@ -111,6 +141,7 @@ function CreateASpot() {
                   className='local-location-spot-input'
                   type="text"
                   placeholder='State'
+                //   defaultValue={spot.state}
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                   required
@@ -126,6 +157,7 @@ function CreateASpot() {
                   className='geographic-location-longitude-spot-input'
                   type="text"
                   placeholder='Longitude'
+                //   defaultValue={spot.longitude}
                   value={lng}
                   onChange={(e) => setLng(e.target.value)}
                   required
@@ -138,6 +170,7 @@ function CreateASpot() {
                   className='geographic-location-spot-input'
                   type="text"
                   placeholder='Latitude'
+                //   defaultValue={spot.latitude}
                   value={lat}
                   onChange={(e) => setLat(e.target.value)}
                   required
@@ -148,7 +181,7 @@ function CreateASpot() {
 
             <h2 className='guests'>Describe your place to guests</h2>
             <h4 className='features'>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</h4>
-            <textarea onChange={(e) => setDescription(e.target.value)} name="describe-to-guests" id="describe" placeholder="Description"> </textarea>
+            <textarea onChange={(e) => setDescription(e.target.value)} name="describe-to-guests" id="describe" placeholder="Description" > </textarea>
             <div className='new-tile-container'>
             <h2 className='new-tile'>Create a title for your spot</h2>
             </div>
@@ -157,6 +190,7 @@ function CreateASpot() {
               className='create-a-spot-input'
               type="text"
               placeholder='Name of your spot'
+            //   defaultValue={spot.name}
               value={name}
               onChange={(e) => setName(e.target.value)}
               id='description'
@@ -166,14 +200,17 @@ function CreateASpot() {
             <h2 className='new-tile'>Set a base price for your spot</h2>
             </div>
             <h4 className='attention'>Competitive pricing can help your listing stand out and rank higher in search results.</h4>
+            <div style={{width:'99%', fontFamily:'Sour Gummy', marginLeft:'1%'}}>$ &nbsp;
             <input
               className='create-a-spot-input'
               type="number"
               placeholder='Price per night (USD)'
+            //   defaultValue={spot.price}
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               required
             />
+            </div>
             <div className='new-tile-container'>
             <h2 className='new-tile'>Liven up your spot with photos</h2>
             </div>
@@ -201,7 +238,7 @@ function CreateASpot() {
               type="url"
               placeholder='Image URL'
               value={image1}
-              onChange={(e) => setImage1(e.target.value)}
+              onChange={(e) => setImage(e.target.value)}
               
             />
             <br />
@@ -210,7 +247,7 @@ function CreateASpot() {
               type="url"
               placeholder='Image URL'
               value={image2}
-              onChange={(e) => setImage2(e.target.value)}
+              onChange={(e) => setImage(e.target.value)}
               
             />
             <br />
@@ -219,7 +256,7 @@ function CreateASpot() {
               type="url"
               placeholder='Image URL'
               value={image3}
-              onChange={(e) => setImage3(e.target.value)}
+              onChange={(e) => setImage(e.target.value)}
               
             />
             <br />
@@ -238,4 +275,4 @@ function CreateASpot() {
     
     
 
-  export default CreateASpot
+  export default UpdateASpot

@@ -13,9 +13,8 @@ function UserSpotsPage() {
     const navigate = useNavigate()  
     const userId = useSelector((state) => state.session.user.id)
     const spots = useSelector((state) => state.spots.spots);  
-    const dispatch = useDispatch()
-
-
+    const dispatch = useDispatch();
+    const [buttonNavigate, setButtonNavigate] = useState(false);
     
 
     useEffect(() => {
@@ -30,12 +29,13 @@ function UserSpotsPage() {
       return <div>Error: {error}</div>;
     }
 
-    const handleUpdate = (spot) => {
-      navigate('/spots/create', { state: { spot } });
+    const openDeleteForm = () => {
+      setModalContent(<DeleteSpotModal  closeModal={closeModal} />);
     };
 
-    const openDeleteForm = (spotId) => {
-      setModalContent(<DeleteSpotModal spotId={spotId} closeModal={closeModal} />);
+    const handleNavigate = (spotId) => {
+      setButtonNavigate(true);  
+      navigate(`/spots/${spotId}/update`);       
     };
   
 
@@ -45,7 +45,7 @@ function UserSpotsPage() {
         <button className="create-a-spot-manage-spots" onClick={() => navigate('/spots/create')}>Create a New Spot</button>
         <section className='picture-section'>
           <div className="spot-card">
-            {spots.map((spot)=> {
+            {spots.reverse().map((spot)=> {
                return( <picture className='spot-section' key={spot.id}>
                     <img onClick={() => navigate(`/spots/${spot.id}`)} className='Spots' src={`http://localhost:8000/public${spot.previewImage}`}
                     alt={spot.name}
@@ -53,7 +53,7 @@ function UserSpotsPage() {
                     <div className='spot-details'><div className='spot-address'>{spot.city}, {spot.state}</div><div><ImStarFull/>{spot.avgRating ? spot.avgRating: "New"}</div></div>
                     <div className='spot-price'>${spot.price} night</div>
                     <br />
-                    <div className='manage-spots-button-container'><button className="update-button-manage-spots" onClick={() => handleUpdate(spot)}>Update</button><button className="delete-button-manage-spots" onClick={() => openDeleteForm(spot.id)}>Delete</button></div>
+                    <div className='manage-spots-button-container'><button className="update-button-manage-spots" onClick={() => handleNavigate(spot.id)} >Update</button><button className="delete-button-manage-spots" onClick={() => openDeleteForm(spot.id)}>Delete</button></div>
                 </picture>
                 )
             })}

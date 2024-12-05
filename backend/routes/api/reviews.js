@@ -128,6 +128,11 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 router.delete('/:reviewId', requireAuth, async (req, res) => {
     const reviewId = req.params.reviewId;
     const review = await Review.findByPk(reviewId)
+    const spot = await Spot.findOne({
+      where: {
+        id: review.spotId
+      }
+    })
     
     if(!review) {
        return res.status(404).json({
@@ -147,6 +152,13 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
             id: reviewId
         }
     })
+
+    await Spot.decrement('numReviews', {
+      by: 1,
+      where: {
+      id: spot.id
+      }
+  })
 
     res.json({
         message: "Successfully deleted"
