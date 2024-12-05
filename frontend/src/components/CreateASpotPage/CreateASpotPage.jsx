@@ -1,5 +1,7 @@
-import { useState} from 'react';
+import { useState, useEffect} from 'react';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as spotsActions from '../../store/spots';
 import './CreateASpot.css'
 
@@ -20,11 +22,64 @@ function CreateASpot() {
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate()
 
+  const location = useLocation();
+  const spot = location.state?.spot;
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (spot) {
+        setAddress(spot.address);
+        setCity(spot.city);
+        setState(spot.state);
+        setCountry(spot.country);
+        setLat(spot.lat);
+        setLng(spot.lng);
+        setName(spot.name);
+        setDescription(spot.description);
+        setPrice(spot.price);
+    }
+}, [spot]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({}); 
+
+    if(spot) {
+      return dispatch(spotsActions.update(spot.id, {
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+      })).then(() => {
+        setAddress(''),
+        setCity(''),
+        setState (''),
+        setCountry (''),
+        setLat (''),
+        setLng (''),
+        setName (''),
+        setDescription (''),
+        setPrice (''),
+        setPreviewImage (''),
+        setImage (''),
+        setImage1 (''),
+        setImage2 (''),
+        setImage3 ('')
+       })
+        .catch(async (res) => {
+          const data = await res.json();
+          console.log(data)
+          if (data && data.errors) {
+             setErrors(data.errors); 
+          } 
+        }, navigate('/spots/:userId/current'));
+    } else
   
     return dispatch(
       spotsActions.create({
@@ -49,9 +104,9 @@ function CreateASpot() {
       setDescription (''),
       setPrice (''),
       setPreviewImage (''),
-      setImage ('')
-      setImage1 ('')
-      setImage2 ('')
+      setImage (''),
+      setImage1 (''),
+      setImage2 (''),
       setImage3 ('')
      })
       .catch(async (res) => {
@@ -60,14 +115,14 @@ function CreateASpot() {
         if (data && data.errors) {
            setErrors(data.errors); 
         } 
-      });
+      }, navigate('/spots/:userId/current'));
       
   };
+
         
-      
       return (
         <div className='create-a-spot-container'>
-          <h1 className='create-a-spot-text'>Create a new Spot</h1>
+          <h1 className='create-a-spot-text'> {spot ? "Update your" : "Create a new"} Spot</h1>
           <h2 className='guests'>Where's your place located?</h2>
           <h4 className='features'>Guests will only get your exact address once they booked a reservation</h4>
           <form onSubmit={handleSubmit} className='create-a-spot-form'>
@@ -184,7 +239,7 @@ function CreateASpot() {
               placeholder='Preview Image URL'
               value={previewImage}
               onChange={(e) => setPreviewImage(e.target.value)}
-              required              
+              required={!spot}             
             />
             <br />
             <input
@@ -228,7 +283,7 @@ function CreateASpot() {
               <button
                 className='create-a-spot-button'
                 type="submit"
-              >Create Spot</button>
+              >{spot ? "Update Spot" : "Create Spot"}</button>
             </div>
             <br />
    </form>

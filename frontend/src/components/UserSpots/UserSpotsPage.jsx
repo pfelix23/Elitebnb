@@ -13,9 +13,7 @@ function UserSpotsPage() {
     const navigate = useNavigate()  
     const userId = useSelector((state) => state.session.user.id)
     const spots = useSelector((state) => state.spots.spots);  
-    const dispatch = useDispatch();
-    const [buttonNavigate, setButtonNavigate] = useState(false);
-    
+    const dispatch = useDispatch();    
 
     useEffect(() => {
       if (userId) {
@@ -29,14 +27,17 @@ function UserSpotsPage() {
       return <div>Error: {error}</div>;
     }
 
-    const openDeleteForm = () => {
-      setModalContent(<DeleteSpotModal  closeModal={closeModal} />);
+    const openDeleteForm = (spotId) => {
+      setModalContent(<DeleteSpotModal spotId={spotId} closeModal={closeModal} />);
     };
 
-    const handleNavigate = (spotId) => {
-      setButtonNavigate(true);  
-      navigate(`/spots/${spotId}/update`);       
-    };
+    const openUpdateForm = (spot) => {
+      navigate('/spots/create', {
+          state: {
+              spot: spot, 
+          },
+      });
+  };
   
 
     return (
@@ -53,7 +54,7 @@ function UserSpotsPage() {
                     <div className='spot-details'><div className='spot-address'>{spot.city}, {spot.state}</div><div><ImStarFull/>{spot.avgRating ? spot.avgRating: "New"}</div></div>
                     <div className='spot-price'>${spot.price} night</div>
                     <br />
-                    <div className='manage-spots-button-container'><button className="update-button-manage-spots" onClick={() => handleNavigate(spot.id)} >Update</button><button className="delete-button-manage-spots" onClick={() => openDeleteForm(spot.id)}>Delete</button></div>
+                    <div className='manage-spots-button-container'><button className="update-button-manage-spots" onClick={() => openUpdateForm(spot)} >Update</button><button className="delete-button-manage-spots" onClick={() => openDeleteForm(spot.id)}>Delete</button></div>
                 </picture>
                 )
             })}

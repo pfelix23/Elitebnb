@@ -59,14 +59,6 @@ function SpotDetails() {
             setError(error);
           });
       }, [spotId]);
-    
-      if (error) {
-        return <div>Error: {error.message}</div>;
-      }
-    
-      if (!spot) {
-        return <div>Loading...</div>;
-      }
 
       const userHasReviewed = reviews?.find((review) => review.userId === sessionUser?.id);
 

@@ -16,7 +16,11 @@ function DeleteSpotModal({spotId}) {
     setErrors({});
     return dispatch(spotsActions.deleteSpot(spotId),
     )
-   .then(closeModal)
+   .then(() => {
+   
+   dispatch(spotsActions.getSpots(userId)); 
+   closeModal()
+  })
     .catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) {

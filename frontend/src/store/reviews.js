@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const CREATE_REVIEW = 'spots/createReview';
 const REMOVE_REVIEW = 'reviews/removeReview';
 const UPDATE_REVIEW = 'reviews/updateReview';
+const GET_SPOT_REVIEWS = 'reviews/getSpotReviews'
 
 const createReview = (reviews) => {
     return {
@@ -23,6 +24,8 @@ const updateReview = (reviews) => {
         payload: reviews
     };
 };
+
+cont getSpotReview =
 
 export const post = (reviews, spotId) => async (dispatch) => {
     const {review, stars} = reviews;
