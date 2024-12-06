@@ -24,7 +24,7 @@ function ProfileButton({ user }) {
             <div ><h4 style={{display:'flex', justifyContent:'center', alignItems: 'center', fontFamily: 'Sour Gummy'}}>Hello, {user.firstName}</h4></div>
             <div><h4 style={{ fontFamily: 'Sour Gummy', display:'flex', justifyContent:'center', alignItems: 'center'}}>{user.email}</h4></div>
             <div style={{borderBottom:'solid black 2px', borderTop: 'solid black 2px'}} ><h4 className='manage-spots' onClick={() => navigate('/spots/:spotId/current')} >Manage Spots</h4></div>
-            <div>
+            <div className='logout-button-container'>
               <button onClick={logout} className='logout-button'>Log Out</button>
             </div>
           </div>

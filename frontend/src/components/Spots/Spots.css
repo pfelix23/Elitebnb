@@ -80,7 +80,7 @@
   }
 
 .spot-section2 {
-    margin-top: 2.7%;
+    margin-top: 2.9%;
     position: relative;
     width: 20vw; 
     margin-bottom: .5%; 
@@ -187,6 +187,7 @@
 
 .review-text {
   font-family: "Roboto", sans-serif;
+  font-weight: bold;
 }
 
 .review-section {

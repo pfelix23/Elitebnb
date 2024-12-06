@@ -37,6 +37,7 @@ function ReviewFormModal({spotId}) {
         name="review" 
         id="submitReview"
         placeholder='Just a quick review'
+        // value={review}
         onChange={(e) => setReview(e.target.value)}
         ></textarea>
         </div>

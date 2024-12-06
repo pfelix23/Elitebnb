@@ -5,6 +5,12 @@ const REMOVE_SPOT = 'spots/removeSpot';
 const UPDATE_SPOT = 'spots/updateSpot';
 const CREATE_REVIEW = 'spots/createReview';
 const GET_CURRENT_SPOTS ='spots/current';
+const GET_SPOT = 'spots/getSpot';
+
+const getSpot = (spot) => ({
+    type: GET_SPOT,
+    payload: spot
+  });
 
 const createSpot = (spot) => {
     return {
@@ -42,7 +48,7 @@ const getCurrentSpots = (spots) => {
 
 
 export const create = (spot) => async (dispatch) => {
-    const {address, city, state, country, lat, lng, name, description, price} = spot;
+    const {address, city, state, country, lat, lng, name, description, price, previewImage, image, image1, image2, image3} = spot;
     const response = await csrfFetch("/api/spots/create", {
         method: "POST",
         body: JSON.stringify({
@@ -54,7 +60,13 @@ export const create = (spot) => async (dispatch) => {
             lng, 
             name, 
             description, 
-            price
+            price,
+            previewImage, 
+            image,
+            image1,
+            image2,
+            image3
+
         })
     });
     const data = await response.json();
@@ -115,6 +127,16 @@ export const getSpots = (userId) => async (dispatch) => {
     return response;
   };
 
+  export const getSpotDetails = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+      method: 'GET',
+  });
+  const data = await response.json()
+  dispatch(getSpot(data.spot));
+  return response;
+};
+   
+
 const initialState = { spot: null, spots: [], reviews: [] };
 
 const spotsReducer = (state = initialState, action) => {
@@ -129,6 +151,8 @@ const spotsReducer = (state = initialState, action) => {
             return { ...state, reviews: action.payload };
         case GET_CURRENT_SPOTS:
             return { ...state, spots: action.payload}
+        case GET_SPOT:
+            return {...state, spot: action.payload}
         default:
             return state;
     }

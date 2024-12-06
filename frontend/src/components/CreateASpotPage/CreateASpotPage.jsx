@@ -38,6 +38,12 @@ function CreateASpot() {
         setName(spot.name);
         setDescription(spot.description);
         setPrice(spot.price);
+        setPreviewImage(spot.previewImage);
+        setImage(spot.image)
+        setImage1(spot.image1)
+        setImage2(spot.image2)
+        setImage3(spot.image3)
+      
     }
 }, [spot]);
 
@@ -55,7 +61,13 @@ function CreateASpot() {
         lng,
         name,
         description,
-        price
+        price,
+        previewImage,
+        image,
+        image1,
+        image2,
+        image3
+      
       })).then(() => {
         setAddress(''),
         setCity(''),
@@ -91,9 +103,15 @@ function CreateASpot() {
         lng,
         name,
         description,
-        price
+        price,
+        previewImage,
+        image,
+        image1,
+        image2,
+        image3
       } ),
-     ).then(() => {
+     ).then( () => {    
+      
       setAddress(''),
       setCity(''),
       setState (''),
@@ -283,7 +301,7 @@ function CreateASpot() {
               <button
                 className='create-a-spot-button'
                 type="submit"
-              >{spot ? "Update Spot" : "Create Spot"}</button>
+              >Create Spot</button>
             </div>
             <br />
    </form>

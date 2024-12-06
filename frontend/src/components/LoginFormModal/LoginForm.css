@@ -7,6 +7,7 @@
 
 .login-container {
     border-radius: 50px;
+    height: 49vh;
 }
 
 .username-input {

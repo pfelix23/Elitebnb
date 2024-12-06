@@ -25,18 +25,15 @@ function Spots() {
         });
     }, []);  
 
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    }
-  
+    
 
     return (
       <div>
         <section className='picture-section'>
           <div className="spot-card">
-            {spots.map((spot)=> {
+            {spots.reverse().map((spot)=> {
                return( <picture onClick={() => navigate(`/spots/${spot.id}`)} className='spot-section' key={spot.id}>
-                    <img className='Spots' src={`http://localhost:8000/public${spot.previewImage}`}
+                    <img className='Spots' src={spot.previewImage}
                     alt={spot.name}
                     title={spot.name} />
                     <div className='spot-details'><div className='spot-address'>{spot.city}, {spot.state}</div><div><IoStarSharp/>{spot.avgRating ? spot.avgRating: "New"}</div></div>

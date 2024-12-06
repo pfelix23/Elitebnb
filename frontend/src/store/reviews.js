@@ -25,7 +25,6 @@ const updateReview = (reviews) => {
     };
 };
 
-cont getSpotReview =
 
 export const post = (reviews, spotId) => async (dispatch) => {
     const {review, stars} = reviews;

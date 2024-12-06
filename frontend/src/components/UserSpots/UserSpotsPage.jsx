@@ -38,6 +38,8 @@ function UserSpotsPage() {
           },
       });
   };
+
+  console.log(spots)
   
 
     return (
@@ -48,7 +50,7 @@ function UserSpotsPage() {
           <div className="spot-card">
             {spots.reverse().map((spot)=> {
                return( <picture className='spot-section' key={spot.id}>
-                    <img onClick={() => navigate(`/spots/${spot.id}`)} className='Spots' src={`http://localhost:8000/public${spot.previewImage}`}
+                    <img onClick={() => navigate(`/spots/${spot.id}`)} className='Spots' src={spot.previewImage}
                     alt={spot.name}
                     title={spot.name} />
                     <div className='spot-details'><div className='spot-address'>{spot.city}, {spot.state}</div><div><ImStarFull/>{spot.avgRating ? spot.avgRating: "New"}</div></div>
