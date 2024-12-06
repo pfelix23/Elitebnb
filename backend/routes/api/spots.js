@@ -12,7 +12,7 @@ const router = express.Router();
 
 
 router.post('/create', requireAuth, async (req, res) => {
-    const {address, city, state, country, lat, lng, name, description, price} = req.body;
+    const {address, city, state, country, lat, lng, name, description, price, previewImage, image, image1, image2, image3} = req.body;
 
     
     
@@ -37,7 +37,7 @@ if(!req.user.id) {
       message: "forbidden"
     })
   }
-        const spot = await Spot.create({ address, city, state, country, lat, lng, name, description, price, ownerId: req.user.id });
+        const spot = await Spot.create({ address, city, state, country, lat, lng, name, description, price, ownerId: req.user.id, previewImage, image, image1, image2, image3 });
         res.status(201).json(spot)
 
 
@@ -46,35 +46,26 @@ if(!req.user.id) {
 
 router.get('/:spotId', async (req, res) => {
     const spotId = req.params.spotId;
-    const spot = await Spot.findByPk(spotId)
+    const spotted = await Spot.findByPk(spotId)
 
-    if(!spot) {
+    if(!spotted) {
         return res.status(404).json({
             message: "Spot couldn't be found"
         })
     }
 
-    res.json(await Spot.findOne({
+    const spot = await Spot.findOne({
       where: {
         id:spotId
       },
-      attributes: {
-        exclude: ['previewImage'],
-        include: [[sequelize.col('avgRating'), 'avgStarRating']]
-    },
-    include: [{
-        model: SpotImage,
-        where: {
-            spotId: spotId
-        },
-        attributes: ['id', 'url', 'preview']
-        },{
+      include: [{
         model: User,
         as: 'Owner',
         attributes: ['id', 'firstName', 'lastName']
-    }]
-      
-    }))
+    }]      
+    })
+
+    res.json({spot})
   });
 
   router.post('/:spotId/addImg', requireAuth, async (req, res) => {
@@ -107,7 +98,7 @@ router.get('/:spotId', async (req, res) => {
   });
 
   router.put('/:spotId/update', requireAuth, async (req, res) => {
-    const {address, city, state, country, lat, lng, name, description, price} = req.body
+    const {address, city, state, country, lat, lng, name, description, price, previewImage, image, image1, image2, image3} = req.body
     const spotId = req.params.spotId;
     const spot = await Spot.findByPk(spotId);
     
@@ -140,7 +131,7 @@ router.get('/:spotId', async (req, res) => {
          })
      } 
 
-     await Spot.update({address, city, state, country, lat, lng, name, description, price},
+     await Spot.update({address, city, state, country, lat, lng, name, description, price, previewImage, image, image1, image2, image3},
         {where: {id: spotId}}
     );
 

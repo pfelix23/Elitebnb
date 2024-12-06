@@ -56,7 +56,24 @@ module.exports = {
         type: Sequelize.DECIMAL
       },
       previewImage: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      image: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      image1: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      image2: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      image3: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
