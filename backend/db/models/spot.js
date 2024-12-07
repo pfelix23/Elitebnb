@@ -63,8 +63,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    numReviews: DataTypes.INTEGER,
-    avgRating: DataTypes.DECIMAL,
+    numReviews:{
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false
+    },
+    avgRating: {
+      type: DataTypes.DECIMAL,
+      defaultValue: 0,
+      allowNull: false
+    },
     previewImage: DataTypes.STRING,
     image: {
       type: DataTypes.STRING,

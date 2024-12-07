@@ -11,25 +11,21 @@ function UserSpotsPage() {
     const [errors, setErrors] = useState(null);  
     const { setModalContent, closeModal } = useModal();
     const navigate = useNavigate()  
-    const userId = useSelector((state) => state.session.user.id)
     const spots = useSelector((state) => state.spots.spots);  
     const dispatch = useDispatch();    
 
-   
-      
-   
-    useEffect((userId) => {
-      
-      dispatch(getSpots(userId))
-   .catch(async (res) => {
-    const data = await res.json();
-    if (data && data.errors) {
-      setErrors(data.errors);
-      console.log(errors)
-    }
-  })
-       
-    }, [userId, dispatch, errors]);
+  useEffect((userId) => {
+  
+  dispatch(getSpots(userId))
+    .catch(async (res) => {
+      const data = await res.json();
+        if (data && data.errors) {
+        setErrors(data.errors);
+          console.log(errors)
+        } 
+    })
+  }, [closeModal, dispatch, errors]);
+    
 
     const openDeleteForm = (spotId) => {
       setModalContent(<DeleteSpotModal spotId={spotId} closeModal={closeModal} />);

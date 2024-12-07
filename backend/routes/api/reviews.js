@@ -160,6 +160,25 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
       }
   })
 
+  const remainingReviews = await Review.findAll({
+    where: {
+        spotId: spot.id
+    }
+});
+
+
+let newAvgRating = 0;
+if (remainingReviews.length > 0) {
+    const totalRating = remainingReviews.reduce((sum, review) => sum + review.stars, 0);
+    newAvgRating = totalRating / remainingReviews.length;
+} else {
+    
+    newAvgRating = 0;
+}
+
+
+await spot.update({ avgRating: newAvgRating });
+
     res.json({
         message: "Successfully deleted"
     })

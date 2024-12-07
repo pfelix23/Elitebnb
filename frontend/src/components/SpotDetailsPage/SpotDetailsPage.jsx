@@ -38,15 +38,12 @@ function SpotDetails() {
               setErrors(data.errors);
               console.log(errors)
             }
-          })}, [spotId, reviews,errors])
+          })}, [closeModal, errors, spotId])
          
 
     useEffect(() => {
       const fetchSpot =  fetch(`http://localhost:8000/api/spots/${spotId}`)
           .then((res) => {
-            if (!res.ok) {
-              throw new Error('Network response was not ok');
-            }
             return res.json();
           })
           .then((data) => {
@@ -59,10 +56,8 @@ function SpotDetails() {
               setErrors(data.errors);
               console.log(errors)
             }
-          });
-
-          fetchSpot
-      }, [spotId, errors]);
+          }); fetchSpot
+      }, [spotId, errors, closeModal]);
 
       if(spot.image)spotImages.push(spot.image)
       if(spot.image1)spotImages.push(spot.image1)
@@ -119,7 +114,7 @@ return (
           
           <div>
           <h2 className="review-head"><ImStarFull />&nbsp;{spot.avgRating || "New"}{spot.numReviews && spot.numReviews > 0 ? <span><LuDot />{spot.numReviews === 1 ? "1 review" : `${spot.numReviews} reviews`}</span>: ""} </h2>
-            {sessionUser && sessionUser.id !== spot.id && !userHasReviewed && (<button className="review-button" onClick={openReviewForm} >Post Your Review</button>)}
+            {sessionUser && sessionUser.id !== spot.ownerId && !userHasReviewed && (<button className="review-button" onClick={openReviewForm} >Post Your Review</button>)}
             
         {reviews && reviews.length > 0 ? (
           [...reviews].reverse().map((review) => (

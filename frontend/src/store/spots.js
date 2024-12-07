@@ -71,7 +71,7 @@ export const create = (spot) => async (dispatch) => {
     });
     const data = await response.json();
     dispatch(createSpot(data.spot));
-    return response;
+    return (data);
 };
 
 export const deleteSpot = (spotId) => async (dispatch) => {

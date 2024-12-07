@@ -280,6 +280,13 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     
     const avgRating = allReviews[0].get('avgRating');
 
+    await Spot.increment('numReviews', {
+        by: 1,
+        where: {
+        id: spotId
+        }
+    })
+
    
     await Spot.update(
         {

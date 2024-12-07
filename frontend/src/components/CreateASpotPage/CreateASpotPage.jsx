@@ -26,7 +26,6 @@ function CreateASpot() {
 
   const location = useLocation();
   const spot = location.state?.spot;
-  
 
   useEffect(() => {
     if (spot) {
@@ -113,22 +112,22 @@ function CreateASpot() {
         image2,
         image3
       } ),
-     ).then( () => {    
-      
-      setAddress(''),
-      setCity(''),
-      setState (''),
-      setCountry (''),
-      setLat (''),
-      setLng (''),
-      setName (''),
-      setDescription (''),
-      setPrice (''),
-      setPreviewImage (''),
-      setImage (''),
-      setImage1 (''),
-      setImage2 (''),
-      setImage3 ('')
+     ).then((data) => {   
+      navigate(`/spots/${data.id}`)
+      setAddress('');
+      setCity('');
+      setState ('');
+      setCountry ('');
+      setLat ('');
+      setLng ('');
+      setName ('');
+      setDescription ('');
+      setPrice ('');
+      setPreviewImage ('');
+      setImage ('');
+      setImage1 ('');
+      setImage2 ('');
+      setImage3 ('');
      })
       .catch(async (res) => {
         const data = await res.json();
@@ -137,7 +136,7 @@ function CreateASpot() {
            setErrors(data.errors); 
            console.log(errors)
         } 
-      }, navigate('/spots/:userId/current'));
+      });
       
   };
 

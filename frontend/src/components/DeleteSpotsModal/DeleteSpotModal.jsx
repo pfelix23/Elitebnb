@@ -17,7 +17,7 @@ function DeleteSpotModal({spotId}) {
     return dispatch(spotsActions.deleteSpot(spotId),
     )
    .then(() => {
-   closeModal()
+   closeModal();
   })
     .catch(async (res) => {
       const data = await res.json();

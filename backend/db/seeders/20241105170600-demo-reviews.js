@@ -24,31 +24,49 @@ const reviews = [
     userId: 4, 
     spotId: 4, 
     review: 'Had a few issues with the amenities, but the view made up for it.',
-    stars: 3
+    stars: 5
   },
   {
     userId: 5, 
     spotId: 5, 
     review: 'Loved the place, but it was a bit overpriced for what it offered.',
-    stars: 4
+    stars: 5
   },
   {
     userId: 6,
-    spotId: 5,
+    spotId: 2,
     review: 'Great spot, very cozy and well-located. The price was a little high, but the experience made it worthwhile.',
     stars: 4
   },
   {
     userId: 7,
-    spotId: 5,
+    spotId: 3,
     review: 'Had a wonderful stay! The location was perfect, but I feel like the amenities could have been better for the price.',
-    stars: 3
+    stars: 5
   },
   {
     userId: 8,
-    spotId: 5,
+    spotId: 6,
     review: 'Fantastic experience overall, but the cost felt a bit steep for what you get. Still, would recommend!',
     stars: 4
+  },
+  {
+    userId: 8,
+    spotId: 7,
+    review: "I loved t!!! I've never stayed in a place like this. Well worth the price.",
+    stars: 5
+  },
+  {
+    userId: 1,
+    spotId: 8,
+    review: 'OMG!!! just OMG.',
+    stars: 5
+  },
+  {
+    userId: 4,
+    spotId: 8,
+    review: 'You have to stay here. Hands down one of my best experiences!! Loved it!!!',
+    stars: 5
   }
 ];
 
