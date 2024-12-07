@@ -37,10 +37,11 @@
 }
 
 #describe {
-    width: 95%;
+    width: 92%;
     height: 20vh;
     background-color: rgb(212, 232, 245);
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+    font-family: 'Sour Gummy';
 
 }
 
@@ -130,9 +131,27 @@ label, .p {
     font-family: "Sour Gummy";
 }
 
+.states.error {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    width: 100%;
+    margin-top: 1%;
+    font-size: 15px;
+}
+
 .address {
     margin-left: -64%;
     font-family: "Sour Gummy";
+}
+
+.address.error {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-left: 20px;
+    width: 96%;
+    font-size: 15px;
 }
 
 .country {
@@ -140,9 +159,55 @@ label, .p {
     font-family: "Sour Gummy";
 }
 
+.country.error {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-left: 20px;
+    width: 96%;
+    font-size: 15px;
+}
+
+.city {
+    font-family: "Sour Gummy";
+}
+
+.city.error {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    width: 96%;
+    font-size: 15px;
+}
+
+.longitude {
+    font-family: "Sour Gummy";
+}
+
+.longitude.error {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    width: 110%;
+    font-size: 15px;
+}
+
+.latitude.error {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    width: 110%;
+    font-size: 15px;
+}
 .guests {
     margin-bottom: -1%;
     margin-left: -2%;
+    font-family: "Sour Gummy";
+}
+
+.guests2 {
+    margin-bottom: -1%;
+    margin-left: -5.5%;
     font-family: "Sour Gummy";
 }
 .features {
@@ -182,18 +247,22 @@ label, .p {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 7vw;
+    width: fit-content;
     margin-left: 1%;
     border-radius: 0%;
     background-color: rgba(194, 19, 19, 0.719);
     color: white;
-    height: 2.5vh;
+    height: fit-content;
     font-weight: bolder;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(19, 18, 18) 0px 0px 0px 3px;
 
   }
   .create-a-spot-button:hover {
     cursor: pointer;
+  }
+
+  .login-button-container {
+    width: 28vw;
   }
 
   .create-a-spot-text {

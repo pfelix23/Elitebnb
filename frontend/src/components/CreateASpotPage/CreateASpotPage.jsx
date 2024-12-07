@@ -147,49 +147,56 @@ function CreateASpot() {
           <h2 className="guests">Where&apos;s your place located?</h2>
           <h4 className='features'>Guests will only get your exact address once they booked a reservation</h4>
           <form onSubmit={handleSubmit} className='create-a-spot-form'>
-            <label htmlFor="country" className='country'>Country</label>
+            <label htmlFor="country" className={`country ${errors.country ? 'error' : ''}`}>Country {errors.country && (
+          <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'3%', marginBottom: '-.3%'}}>{errors.country}</p>
+        )}</label>
             <input
               className='create-a-spot-input'
               type="text"
               placeholder='Country'
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              required
+              
               
             />
             <br />
-            <label htmlFor="address" className='address'>Street Address</label>
+            <label htmlFor="address" className={`address ${errors.address ? 'error' : ''}`}>Street Address {errors.address && (
+          <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'3%', marginBottom: '-.3%'}}>{errors.address}</p>
+        )}</label>
             <input
               className='create-a-spot-input'
               type="text"
               placeholder='Address'
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              required
+              
             />
             
             <div className='local-container'>
               <div>
-                <label htmlFor="city">City</label>
+                <label htmlFor="city" className={`city ${errors.city ? 'error' : ''}`}>City {errors.city && (
+          <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'3%', marginBottom: '-.3%'}}>{errors.city}</p>
+        )}</label>
                 <input
                   className='local-location-city-spot-input'
                   type="text"
                   placeholder='City'
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  required
+                  
                   id="city"
                 />
               </div>
               <div>
-                <label htmlFor="state" className='states'>State</label>
+                <label htmlFor="state" className={`states ${errors.state ? 'error' : ''}`}>State {errors.state && (
+          <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'3%', marginBottom: '-.3%', fontSize:'15px'}}>{errors.state}</p>
+        )}</label>
                 <input
                   className='local-location-spot-input'
                   type="text"
                   placeholder='State'
                   value={state}
                   onChange={(e) => setState(e.target.value)}
-                  required
                   id="state"                  
                 />
               </div>
@@ -197,34 +204,39 @@ function CreateASpot() {
 
             <div className='geographic-container'>
               <div>
-                <label htmlFor="city">Longitude</label>
+                <label htmlFor="Longitude" className={`longitude ${errors.lng ? 'error' : ''}`}>Longitude {errors.lng && (
+                <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'3%', marginBottom: '-.3%', fontSize:'15px'}}>{errors.lng}</p>
+              )}</label>
                 <input
                   className='geographic-location-longitude-spot-input'
                   type="text"
                   placeholder='Longitude'
                   value={lng}
                   onChange={(e) => setLng(e.target.value)}
-                  required
                   id="Longitude"
                 />
               </div>
               <div>
-                <label htmlFor="state" className='latitude'>Latitude</label>
+                <label htmlFor="Latitude" className={`latitude ${errors.lng ? 'error' : ''}`}>Latitude {errors.lat && (
+                <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'3%', marginBottom: '-.3%', fontSize:'15px'}}>{errors.lat}</p>
+              )}</label>
                 <input
                   className='geographic-location-spot-input'
                   type="text"
                   placeholder='Latitude'
                   value={lat}
                   onChange={(e) => setLat(e.target.value)}
-                  required
                   id="Latitude"
                 />
               </div>
             </div>
 
-            <h2 className='guests'>Describe your place to guests</h2>
+            <h2 className='guests2'>Describe your place to guests</h2>
             <h4 className='features'>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</h4>
-            <textarea onChange={(e) => setDescription(e.target.value)} value={description} name="describe-to-guests" id="describe" placeholder="Description"> </textarea>
+            <textarea onChange={(e) => setDescription(e.target.value)} value={description} name="describe-to-guests" id="describe" placeholder="Please write at least 30 characters"> </textarea>
+            {errors.description && (
+                <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'-54%', marginTop: '1%', fontSize:'15px', fontWeight:'bold'}}>{errors.description}</p>
+              )}
             <div className='new-tile-container'>
             <h2 className='new-tile'>Create a title for your spot</h2>
             </div>
@@ -236,8 +248,10 @@ function CreateASpot() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               id='name'
-              required
             />
+            {errors.name && (
+                <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'-21.5%', marginTop: '2%', fontSize:'15px', fontWeight:'bold'}}>{errors.name}</p>
+              )}
             <div className='new-tile-container'>
             <h2 className='new-tile'>Set a base price for your spot</h2>
             </div>
@@ -249,9 +263,11 @@ function CreateASpot() {
               placeholder='Price per night (USD)'
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              required
             />
             </div>
+            {errors.price && (
+                <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'-18.5%', marginTop: '2%', fontSize:'15px', fontWeight:'bold'}}>{errors.price}</p>
+              )}
             <div className='new-tile-container'>
             <h2 className='new-tile'>Liven up your spot with photos</h2>
             </div>
@@ -262,8 +278,11 @@ function CreateASpot() {
               placeholder='Preview Image URL'
               value={previewImage}
               onChange={(e) => setPreviewImage(e.target.value)}
-              required={!spot}             
+                       
             />
+            {errors.previewImage && (
+                <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'-45%', marginTop: '1%', fontSize:'15px', marginBottom:'-2%', fontWeight:'bold'}}>{errors.previewImage}</p>
+              )}
             <br />
             <input
               className='create-a-spot-input'
@@ -306,7 +325,7 @@ function CreateASpot() {
               <button
                 className='create-a-spot-button'
                 type="submit"
-              >Create Spot</button>
+              >{!spot? 'Create Spot' : 'Update your Spot'}</button>
             </div>
             <br />
    </form>

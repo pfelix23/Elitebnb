@@ -16,7 +16,7 @@ router.post('/create', requireAuth, async (req, res) => {
 
     
     
-    if(!address || !city || !state || !country || !lat || !lng || !name || !description || !price || name.length > 50 ||  lat < -90 || lat > 90 || lng < -180 || lng > 180 || price < 0) {
+    if(!address || !city || !state || !country || !lat || !lng || !name || !description || !price || name.length > 50 ||  lat < -90 || lat > 90 || lng < -180 || lng > 180 || price < 0 || !previewImage) {
         return res.status(400).json({
             message: "Bad Request", 
             errors: {
@@ -24,11 +24,12 @@ router.post('/create', requireAuth, async (req, res) => {
         city: "City is required",
         state: "State is required",
         country: "Country is required",
-        lat: "Latitude must be within -90 and 90",
-        lng: "Longitude must be within -180 and 180",
+        lat: "Lat is required",
+        lng: "Lng is required",
         name: "Name must be less than 50 characters",
         description: "Description is required",
-        price: "Price per day must be a positive number"
+        price: "Price per day must be a positive number",
+        previewImage: "Preview Image is required."
     }
 })
 } 
@@ -280,6 +281,9 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     
     const avgRating = allReviews[0].get('avgRating');
 
+    const limitAvgRating = parseFloat(avgRating).toFixed(2);
+    
+
     await Spot.increment('numReviews', {
         by: 1,
         where: {
@@ -290,7 +294,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
    
     await Spot.update(
         {
-            avgRating: avgRating
+            avgRating: limitAvgRating
         },
         {
             where: { id: spotId }

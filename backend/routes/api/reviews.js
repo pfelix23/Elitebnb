@@ -176,8 +176,10 @@ if (remainingReviews.length > 0) {
     newAvgRating = 0;
 }
 
+const limitNewAvgRating = parseFloat(newAvgRating).toFixed(2);
 
-await spot.update({ avgRating: newAvgRating });
+
+await spot.update({ avgRating: limitNewAvgRating });
 
     res.json({
         message: "Successfully deleted"

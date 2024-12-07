@@ -13,9 +13,21 @@
 
   }
 
-  .submit-review:hover {
-    cursor: pointer;
-  }
+  .submit-review:disabled {
+    width: 90%;
+    height: 100%;
+    box-shadow: grey 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    background-color: white;
+    color: grey;
+    font-family: 'Roboto';
+    height: 6vh;
+    font-weight: bolder;
+    cursor: default;
+}
+
+.submit-review:not(:disabled) {
+  cursor: pointer;
+}
 
   #submitReview {
     width: 90%;

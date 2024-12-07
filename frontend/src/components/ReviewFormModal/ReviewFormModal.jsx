@@ -7,8 +7,8 @@ import './ReviewFormModal.css'
 function ReviewFormModal({spotId}) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const [review, setReview] = useState();
-  const [stars, setStars] = useState();
+  const [review, setReview] = useState('');
+  const [stars, setStars] = useState(null);
   const [errors, setErrors] = useState({});
   
   const handleSubmit = (e) => {
@@ -16,7 +16,7 @@ function ReviewFormModal({spotId}) {
     setErrors({});
     return dispatch(spotsActions.post(spotId, { review, stars }),
     setReview(''),
-    setStars('')
+    setStars(null)
     )
    .then(closeModal)
     .catch(async (res) => {
@@ -33,12 +33,13 @@ function ReviewFormModal({spotId}) {
   return (
     <div className='login-container' style={{marginBottom: '5%'}}>
       <h1 className='login-text' style={{fontFamily: 'Sour Gummy'}}>How was your stay?</h1>
+      {errors.error && (<p style={{color:'red', fontFamily:'Sour Gummy', fontSize:'15px', fontWeight:'bold'}}>{errors.error}</p>)}
       <form onSubmit={handleSubmit} className='login-form'>
         <div className='submitReviewContainer'>
         <textarea 
         name="review" 
         id="submitReview"
-        placeholder='Just a quick review'
+        placeholder='Leave your review here...'
         value={review}
         onChange={(e) => setReview(e.target.value)}
         ></textarea>
@@ -61,6 +62,7 @@ function ReviewFormModal({spotId}) {
         <button 
         className='submit-review'
         type='submit'
+        disabled={review.length < 10 || stars === null}
         > Submit Your Review </button>
         </div> 
       </form>
