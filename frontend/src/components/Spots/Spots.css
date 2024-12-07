@@ -73,6 +73,19 @@
     text-align: center; 
   }
 
+  @media (max-width: 768px) {
+    .spot-section {
+      width: 48%;  
+    }
+  }
+  
+  
+  @media (max-width: 480px) {
+    .spot-section {
+      width: 100%;  
+    }
+  }
+
 .image-grid {
     display: flex;
     flex-wrap: wrap;

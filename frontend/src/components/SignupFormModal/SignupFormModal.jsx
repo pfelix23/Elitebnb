@@ -29,7 +29,9 @@ function SignupFormModal() {
           lastName,
           password
         })
-      ).catch(async (res) => {
+      ).then(() => {
+        window.location.href = '/'
+      }).catch(async (res) => {
         const data = await res.json();
         if (data?.errors) {
           setErrors(data.errors);

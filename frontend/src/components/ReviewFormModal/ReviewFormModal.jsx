@@ -23,9 +23,11 @@ function ReviewFormModal({spotId}) {
       const data = await res.json();
       if (data && data.errors) {
         setErrors(data.errors);
+        console.log(errors)
       }
     });
   };
+  
   
   
   return (
@@ -37,23 +39,23 @@ function ReviewFormModal({spotId}) {
         name="review" 
         id="submitReview"
         placeholder='Just a quick review'
-        // value={review}
+        value={review}
         onChange={(e) => setReview(e.target.value)}
         ></textarea>
         </div>
         <div className='star-container'>
             <ul className="rate-area">
                 <input type="radio" id="5-star" name="crating" value="5" onClick={(e) => setStars(parseInt(e.target.value))}/>
-                    <label for="5-star" title="Amazing">5 stars</label>
+                    <label htmlFor="5-star" title="Amazing">5 stars</label>
                                     <input type="radio" id="4-star" name="crating" value="4" onClick={(e) => setStars(parseInt(e.target.value))}/>
-                    <label for="4-star" title="Good">4 stars</label>
+                    <label htmlFor="4-star" title="Good">4 stars</label>
                                     <input type="radio" id="3-star" name="crating" value="3" onClick={(e) => setStars(parseInt(e.target.value))}/>
-                    <label for="3-star" title="Average">3 stars</label>
+                    <label htmlFor="3-star" title="Average">3 stars</label>
                                     <input type="radio" id="2-star" name="crating" value="2" onClick={(e) => setStars(parseInt(e.target.value))}/>
-                    <label for="2-star" title="Not Good">2 stars</label>
+                    <label htmlFor="2-star" title="Not Good">2 stars</label>
                                     <input type="radio" id="1-star" required=""
                     name="crating" value="1" aria-required="true" onClick={(e) => setStars(parseInt(e.target.value))}/>
-                    <label for="1-star" title="Bad">1 star</label>
+                    <label htmlFor="1-star" title="Bad">1 star</label>
                     </ul> &nbsp; stars</div>
         <div className='review-button-div'>
         <button 

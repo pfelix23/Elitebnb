@@ -48,12 +48,12 @@ function Navigation({ isLoaded }) {
   return (
     <div className='root-div'>
       <img onClick={() => navigate('/')} className='logo' src="/Elite-BNBStays.png" alt="Elitebnb"/>
+      <a className='Elmur-box' href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img className='Elmur-Fudd' src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/e4638f60-ecd7-4228-b667-e7628252709e/dh441km-784f793c-f60e-407c-92d7-fcfc4482aed7.png/v1/fit/w_750,h_1250/elmer_fudd_by_disneycrossover143_dh441km-375w-2x.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU4MSIsInBhdGgiOiJcL2ZcL2U0NjM4ZjYwLWVjZDctNDIyOC1iNjY3LWU3NjI4MjUyNzA5ZVwvZGg0NDFrbS03ODRmNzkzYy1mNjBlLTQwN2MtOTJkNy1mY2ZjNDQ4MmFlZDcucG5nIiwid2lkdGgiOiI8PTIxNDgifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.oAm8x5mgcDOuXel2JDhCaU0s4MyM-WGStaFKuBgMucE" alt="Elmur" /></a>
       <div className='nav-ul'>
         <div className='nav-item' ref={dropdownRef}>
           <button onClick={toggleDropdown} className="dropdown-button">
             <AiOutlineMenu className='cgmenu' />
-            <PiUserFill className='PiUserFill'/>
-          
+            <PiUserFill className='PiUserFill'/>          
           </button>
           {dropdownVisible && (
             <div className="dropdown-menu">

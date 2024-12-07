@@ -10,7 +10,7 @@ import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
 
 function SpotDetails() {
     const [spot, setSpot] = useState({});     
-    const [error, setError] = useState(null);   
+    const [errors, setErrors] = useState(null);   
     const [reviews, setReviews] = useState(null)
     const {spotId} = useParams() 
     const { setModalContent, closeModal } = useModal();
@@ -22,20 +22,27 @@ function SpotDetails() {
         "July", "August", "September", "October", "November", "December"
       ];
 
+      const openDeleteForm = (reviewId) => {
+        setModalContent(<DeleteReviewModal reviewId={reviewId} closeModal={closeModal} />);
+      };
+
     useEffect(() => {
         fetch(`http://localhost:8000/api/spots/${spotId}/reviews`)
           .then((res) => {
-            if (!res.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return res.json();
+           return res.json();
           }).then((data) => {
             setReviews(data)
-          })}, [spotId])
+          }).catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+              setErrors(data.errors);
+              console.log(errors)
+            }
+          })}, [spotId, reviews,errors])
          
 
     useEffect(() => {
-        fetch(`http://localhost:8000/api/spots/${spotId}`)
+      const fetchSpot =  fetch(`http://localhost:8000/api/spots/${spotId}`)
           .then((res) => {
             if (!res.ok) {
               throw new Error('Network response was not ok');
@@ -46,29 +53,31 @@ function SpotDetails() {
            setSpot(data.spot);  
             
           })
-          .catch((error) => {
-            console.log('Error fetching spot:', error);
-            setError(error);
+          .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+              setErrors(data.errors);
+              console.log(errors)
+            }
           });
-      }, [spotId]);
 
-      spotImages.push(spot.image)
-      spotImages.push(spot.image1)
-      spotImages.push(spot.image2)
-      spotImages.push(spot.image3)
-            
+          fetchSpot
+      }, [spotId, errors]);
+
+      if(spot.image)spotImages.push(spot.image)
+      if(spot.image1)spotImages.push(spot.image1)
+      if(spot.image2)spotImages.push(spot.image2)
+      if(spot.image3)spotImages.push(spot.image3)
 
       const userHasReviewed = reviews?.find((review) => review.userId === sessionUser?.id);
 
       const openReviewForm = () => {
         setModalContent(<ReviewFormModal spotId={spotId} closeModal={closeModal} />);
       };
+      
 
-      const openDeleteForm = (reviewId) => {
-        setModalContent(<DeleteReviewModal reviewId={reviewId} closeModal={closeModal} />);
-      };
-    
-      return (
+            
+return (
         <div className="root-details">
           <div style={{marginLeft:'6%'}}>
           <h1 style={{fontFamily:'Roboto', marginLeft:'-1%'}}>{spot.name}</h1>
@@ -88,10 +97,10 @@ function SpotDetails() {
               
               
                 <div className="image-grid">
-                  {spotImages.map((spotImage) => (
+                  {spotImages.map((spotImage, index) => (
                     <picture
                       className="spot-section2"
-                      key={spot.id}
+                      key={index}
                     >
                       <img
                         className="spot-addPics2 smaller-image"
@@ -110,10 +119,10 @@ function SpotDetails() {
           
           <div>
           <h2 className="review-head"><ImStarFull />&nbsp;{spot.avgRating || "New"}{spot.numReviews && spot.numReviews > 0 ? <span><LuDot />{spot.numReviews === 1 ? "1 review" : `${spot.numReviews} reviews`}</span>: ""} </h2>
-            {sessionUser && sessionUser.id !== spot.id && !userHasReviewed && (<button className="review-button" onClick={openReviewForm}>Post Your Review</button>)}
+            {sessionUser && sessionUser.id !== spot.id && !userHasReviewed && (<button className="review-button" onClick={openReviewForm} >Post Your Review</button>)}
             
         {reviews && reviews.length > 0 ? (
-          reviews.reverse().map((review) => (
+          [...reviews].reverse().map((review) => (
             <section className="review-section" key={review.id}>
               {review.User && (<h3 className="review-user"> {review.User.firstName}</h3>)}
               {review.createdAt && (<h3>{monthNames[(review.createdAt.split('-')[1])-1]} {review.createdAt.split('-')[0]}</h3>)}

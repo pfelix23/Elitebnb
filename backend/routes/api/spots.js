@@ -37,8 +37,24 @@ if(!req.user.id) {
       message: "forbidden"
     })
   }
+
         const spot = await Spot.create({ address, city, state, country, lat, lng, name, description, price, ownerId: req.user.id, previewImage, image, image1, image2, image3 });
         res.status(201).json(spot)
+
+        const imageUrls = [
+            { url: previewImage, spotId: spot.id, preview: true },
+            { url: image, spotId: spot.id, preview: false },
+            { url: image1, spotId: spot.id, preview: false },
+            { url: image2, spotId: spot.id, preview: false },
+            { url: image3, spotId: spot.id, preview: false }
+        ];
+        
+        
+        for (const img of imageUrls) {
+            if (img.url) {
+                await SpotImage.create(img);
+            }
+        }
 
 
 })
@@ -62,7 +78,10 @@ router.get('/:spotId', async (req, res) => {
         model: User,
         as: 'Owner',
         attributes: ['id', 'firstName', 'lastName']
-    }]      
+    },{
+        model: SpotImage,
+        attributes: ['url', 'preview']
+    }  ]      
     })
 
     res.json({spot})
@@ -518,7 +537,11 @@ router.get('/:userId/current', requireAuth, async (req, res) => {
       },
       attributes: {
         exclude: ['numReviews']
-      }
+      },
+      include: [{
+        model: SpotImage,
+        attributes: ['url', 'preview']
+    }]    
     })
     
     res.json({

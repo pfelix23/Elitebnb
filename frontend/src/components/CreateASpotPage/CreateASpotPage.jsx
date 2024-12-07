@@ -26,6 +26,7 @@ function CreateASpot() {
 
   const location = useLocation();
   const spot = location.state?.spot;
+  
 
   useEffect(() => {
     if (spot) {
@@ -52,6 +53,7 @@ function CreateASpot() {
     setErrors({}); 
 
     if(spot) {
+       const spotId = spot.id
       return dispatch(spotsActions.update(spot.id, {
         address,
         city,
@@ -88,9 +90,10 @@ function CreateASpot() {
           const data = await res.json();
           console.log(data)
           if (data && data.errors) {
-             setErrors(data.errors); 
+             setErrors(data.errors);
+             console.log(errors) 
           } 
-        }, navigate('/spots/:userId/current'));
+        }, navigate(`/spots/${spotId}`));
     } else
   
     return dispatch(
@@ -132,6 +135,7 @@ function CreateASpot() {
         console.log(data)
         if (data && data.errors) {
            setErrors(data.errors); 
+           console.log(errors)
         } 
       }, navigate('/spots/:userId/current'));
       
@@ -140,8 +144,8 @@ function CreateASpot() {
         
       return (
         <div className='create-a-spot-container'>
-          <h1 className='create-a-spot-text'> {spot ? "Update your" : "Create a new"} Spot</h1>
-          <h2 className='guests'>Where's your place located?</h2>
+          <h1 className="create-a-spot-text"> {spot ? "Update your" : "Create a new"} Spot</h1>
+          <h2 className="guests">Where&apos;s your place located?</h2>
           <h4 className='features'>Guests will only get your exact address once they booked a reservation</h4>
           <form onSubmit={handleSubmit} className='create-a-spot-form'>
             <label htmlFor="country" className='country'>Country</label>
@@ -221,32 +225,34 @@ function CreateASpot() {
 
             <h2 className='guests'>Describe your place to guests</h2>
             <h4 className='features'>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</h4>
-            <textarea onChange={(e) => setDescription(e.target.value)} name="describe-to-guests" id="describe" placeholder="Description"> </textarea>
+            <textarea onChange={(e) => setDescription(e.target.value)} value={description} name="describe-to-guests" id="describe" placeholder="Description"> </textarea>
             <div className='new-tile-container'>
             <h2 className='new-tile'>Create a title for your spot</h2>
             </div>
-            <h4 className='attention'>Catch guests' attention with a spot title that highlights what makes your place special.</h4>
+            <h4 className='attention'>Catch guests&apos; attention with a spot title that highlights what makes your place special.</h4>
             <input
               className='create-a-spot-input'
               type="text"
               placeholder='Name of your spot'
               value={name}
               onChange={(e) => setName(e.target.value)}
-              id='description'
+              id='name'
               required
             />
             <div className='new-tile-container'>
             <h2 className='new-tile'>Set a base price for your spot</h2>
             </div>
             <h4 className='attention'>Competitive pricing can help your listing stand out and rank higher in search results.</h4>
-            <input
-              className='create-a-spot-input'
+            <div className='creative-container'><div>$</div>
+            <input 
+              className='create-a-spot-input-1'
               type="number"
               placeholder='Price per night (USD)'
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               required
             />
+            </div>
             <div className='new-tile-container'>
             <h2 className='new-tile'>Liven up your spot with photos</h2>
             </div>

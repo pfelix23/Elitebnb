@@ -5,23 +5,23 @@ import { useNavigate } from 'react-router-dom';
 
 function Spots() {
     const [spots, setSpots] = useState([]);   
-    const [error, setError] = useState(null);  
+    const [errors, setErrors] = useState(null);  
     const navigate = useNavigate()    
     
     useEffect(() => {
       fetch('http://localhost:8000/api/spots')  
         .then((res) => {
-          if (!res.ok) {
-            throw new Error('Network response was not ok');
-          }
           return res.json();
         })
         .then((data) => {
           setSpots(data.Spots); 
         })
-        .catch((error) => {
-          console.error('Error fetching spot:', error);
-          setError(error);  
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) {
+            setErrors(data.errors);
+            console.log(errors)
+          }
         });
     }, []);  
 
@@ -31,7 +31,7 @@ function Spots() {
       <div>
         <section className='picture-section'>
           <div className="spot-card">
-            {spots.reverse().map((spot)=> {
+            {[...spots].reverse().map((spot)=> {
                return( <picture onClick={() => navigate(`/spots/${spot.id}`)} className='spot-section' key={spot.id}>
                     <img className='Spots' src={spot.previewImage}
                     alt={spot.name}

@@ -83,7 +83,7 @@ export const deleteSpot = (spotId) => async (dispatch) => {
   };
 
   export const update = (spotId, spot) => async (dispatch) => {
-    const {address, city, state, country, lat, lng, name, description, price} = spot;
+    const {address, city, state, country, lat, lng, name, description, price, previewImage, image, image1, image2, image3} = spot;
     const response = await csrfFetch(`/api/spots/${spotId}/update`, {
         method: "PUT",
         body: JSON.stringify({
@@ -95,7 +95,12 @@ export const deleteSpot = (spotId) => async (dispatch) => {
             lng, 
             name, 
             description, 
-            price
+            price,
+            previewImage, 
+            image, 
+            image1, 
+            image2, 
+            image3
         })
     });
     const data = await response.json();

@@ -17,16 +17,15 @@ function DeleteSpotModal({spotId}) {
     return dispatch(spotsActions.deleteSpot(spotId),
     )
    .then(() => {
-   
-   dispatch(spotsActions.getSpots(userId)); 
    closeModal()
   })
     .catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) {
         setErrors(data.errors);
+        console.log(errors)
       }
-    });
+    }, [spotId]);
   };
   
   

@@ -14,15 +14,30 @@
 .logo{
     height: 64px;
     width: 110px;
-    background-color: white;
-    
-    
+    background-color: white;    
 }
 
 .logo:hover {
     cursor: pointer;
 }
 
+.Elmur-Fudd {
+    height: 60px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Elmur-Fudd:hover {
+    cursor: pointer;
+}
+
+.Elmur-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .root-div {
     display: flex;
@@ -39,8 +54,8 @@
     border-radius:  var(--profile-button_corner-radius);
     border: 1px solid var(--linaria-theme_palette-deco);
     list-style-type: none;
-    margin-top: -10px;
-    margin-right: 30px;
+    margin-top: -2px;
+    margin-right: 25px;
     background-color: rgb(243, 243, 243);
 }
 
@@ -114,6 +129,7 @@
     color: white;
     
     
+    
 }
 
 .cgmenu {
@@ -146,7 +162,9 @@
     height: 6.5vh;
     display:flex; 
     justify-content: center;
-    align-items: center;   
+    align-items: center;  
+    margin-top: 2%; 
+    margin-bottom: 2%;
     
 }
 
