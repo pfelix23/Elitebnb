@@ -12,9 +12,6 @@ const isProduction = environment === 'production';
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-// app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -97,8 +94,5 @@ app.use((err, _req, res, _next) => {
   });
 });
 
-app.get('*', (req, res) => {  
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));  
-}); 
 
 module.exports = app;
