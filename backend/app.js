@@ -12,7 +12,7 @@ const isProduction = environment === 'production';
 
 const app = express();
 
-// app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // app.use('/public', express.static(path.join(__dirname, 'public')));
 
@@ -96,5 +96,9 @@ app.use((err, _req, res, _next) => {
     stack: isProduction ? null : err.stack
   });
 });
+
+app.get('*', (req, res) => {  
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));  
+}); 
 
 module.exports = app;
