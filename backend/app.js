@@ -11,7 +11,10 @@ const { environment } = require('./config');
 const isProduction = environment === 'production';
 
 const app = express();
-app.use('/public', express.static(path.join(__dirname, 'public')));
+
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+// app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use(morgan('dev'));
 app.use(cookieParser());
