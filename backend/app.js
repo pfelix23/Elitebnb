@@ -12,7 +12,7 @@ const isProduction = environment === 'production';
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+// app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // app.use('/public', express.static(path.join(__dirname, 'public')));
 
