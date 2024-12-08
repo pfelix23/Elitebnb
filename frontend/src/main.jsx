@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux';
-import configureStore from './store';
+import configureStore from './index.js';
 import './index.css';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 import {Modal, ModalProvider } from './context/Modal';
