@@ -23,7 +23,7 @@ function Spots() {
             console.log(errors)
           }
         });
-    }, []);  
+    }, [errors]);  
 
     
 
