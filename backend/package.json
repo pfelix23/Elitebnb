@@ -9,7 +9,10 @@
     "start": "npm run start:production",
     "start:development": "nodemon ./bin/www",
     "start:production": "node ./bin/www",
-    "build": "node psql-setup-script.js"
+    "build": "node psql-setup-script.js",
+    "migrate": "dotenv -e .env sequelize db:migrate --env production",
+    "seed": "dotenv -e .env sequelize db:seed:all --env production",
+    "postdeploy": "npm run migrate && npm run seed"
   },
   "keywords": [],
   "author": "",
