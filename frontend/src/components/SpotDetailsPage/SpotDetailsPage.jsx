@@ -7,6 +7,7 @@ import '../Spots/Spots.css'
 import { useModal } from "../../context/Modal";
 import ReviewFormModal from "../ReviewFormModal/ReviewFormModal";
 import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
+import { csrfFetch } from "../../store/csrf";
 
 function SpotDetails() {
     const [spot, setSpot] = useState({});     
@@ -27,7 +28,7 @@ function SpotDetails() {
       };
 
     useEffect(() => {
-        fetch(`http://localhost:8000/api/spots/${spotId}/reviews`)
+      csrfFetch(`/api/spots/${spotId}/reviews`)
           .then((res) => {
            return res.json();
           }).then((data) => {
@@ -42,7 +43,7 @@ function SpotDetails() {
          
 
     useEffect(() => {
-      const fetchSpot =  fetch(`http://localhost:8000/api/spots/${spotId}`)
+      const fetchSpot =  csrfFetch(`/api/spots/${spotId}`)
           .then((res) => {
             return res.json();
           })

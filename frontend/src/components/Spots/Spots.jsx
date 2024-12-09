@@ -2,6 +2,7 @@ import './Spots.css'
 import { IoStarSharp } from "react-icons/io5";
 import { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { csrfFetch } from '../../store/csrf';
 
 function Spots() {
     const [spots, setSpots] = useState([]);   
@@ -9,7 +10,7 @@ function Spots() {
     const navigate = useNavigate()    
     
     useEffect(() => {
-      fetch('http://localhost:8000/api/spots')  
+      csrfFetch('/api/spots')  
         .then((res) => {
           return res.json();
         })

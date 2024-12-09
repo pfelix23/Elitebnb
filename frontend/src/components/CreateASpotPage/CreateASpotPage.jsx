@@ -92,7 +92,7 @@ function CreateASpot() {
              setErrors(data.errors);
              console.log(errors) 
           } 
-        }, navigate(`/spots/${spotId}`));
+        }, navigate(`/api/spots/${spotId}`));
     } else
   
     return dispatch(
