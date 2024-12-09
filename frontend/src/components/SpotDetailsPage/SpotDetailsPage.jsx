@@ -44,7 +44,7 @@ function SpotDetails() {
          
 
     useEffect(() => {
-      const fetchSpot =  fetch(`/api/spots/${spotId}`)
+      const fetchSpot =  csrfFetch(`/api/spots/${spotId}`)
           .then((res) => {
             return res.json();
           })
