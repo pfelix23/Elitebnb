@@ -16,9 +16,6 @@ export default defineConfig(({ mode }) => ({
   // server: {
   //   open: true
   // }
-  build: {
-    outDir: 'dist', // This ensures that the build output will be in the 'dist' folder
-  },
   server: {
     proxy: {
       '/api': 'http://localhost:8000'
