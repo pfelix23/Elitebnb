@@ -6,11 +6,29 @@ const UPDATE_SPOT = 'spots/updateSpot';
 const CREATE_REVIEW = 'spots/createReview';
 const GET_CURRENT_SPOTS ='spots/current';
 const GET_SPOT = 'spots/getSpot';
+const GET_SPOTS ='spots/getSpots';
+const GET_REVIEWS = 'spots/reviews';
 
-const getSpot = (spot) => ({
+const reviews = (reviews) => {
+    return {
+        type: GET_REVIEWS,
+        payload: reviews
+
+    }
+}
+
+const theSpots = (spots) => {
+   return { 
+    type: GET_SPOTS,
+    payload: spots
+}
+};
+
+const getSpot = (spot) => {
+    return {
     type: GET_SPOT,
-    payload: spot
-  });
+    payload: spot}
+  };
 
 const createSpot = (spot) => {
     return {
@@ -46,6 +64,23 @@ const getCurrentSpots = (spots) => {
     }
 }
 
+export const getReviews = (spotId) => async (dispatch) => {
+    const response = await fetch(`/api/spots/${spotId}/reviews`, {
+        method: 'GET'
+    });
+    const data = await response.json()
+    dispatch(reviews(data.Reviews));
+    return response;
+}
+
+export const allSpots = () => async (dispatch) => {
+    const response = await fetch("/api/spots", {
+        method: 'GET'
+    });
+    const data = await response.json()
+    dispatch(theSpots(data.Spots));
+    return response;
+}
 
 export const create = (spot) => async (dispatch) => {
     const {address, city, state, country, lat, lng, name, description, price, previewImage, image, image1, image2, image3} = spot;
@@ -151,13 +186,17 @@ const spotsReducer = (state = initialState, action) => {
         case REMOVE_SPOT:
             return { ...state, spot: null };
         case UPDATE_SPOT:
-            return { ...state, spot: action.payload}
+            return { ...state, spot: action.payload};
         case CREATE_REVIEW:
             return { ...state, reviews: action.payload };
         case GET_CURRENT_SPOTS:
-            return { ...state, spots: action.payload}
+            return { ...state, spots: action.payload};
         case GET_SPOT:
-            return {...state, spot: action.payload}
+            return {...state, spot: action.payload};
+        case GET_SPOTS:
+            return { ...state, spots: action.payload};
+        case GET_REVIEWS:
+            return { ...state, reviews: action.payload}
         default:
             return state;
     }

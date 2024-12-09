@@ -7,6 +7,7 @@ import '../Spots/Spots.css'
 import { useModal } from "../../context/Modal";
 import ReviewFormModal from "../ReviewFormModal/ReviewFormModal";
 import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
+import { getSpotDetails } from "../../store/spots";
 
 function SpotDetails() {
     const [spot, setSpot] = useState({});     
@@ -42,21 +43,15 @@ function SpotDetails() {
          
 
     useEffect(() => {
-      const fetchSpot =  fetch(`/api/spots/${spotId}`)
-          .then((res) => {
-            return res.json();
-          })
-          .then((data) => {
-           setSpot(data.spot);  
-            
-          })
-          .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.errors) {
-              setErrors(data.errors);
-              console.log(errors)
-            }
-          }); fetchSpot
+      dispatch(getSpotDetails(userId))
+    .catch(async (res) => {
+      const data = await res.json();
+      setSpot(data)
+        if (data && data.errors) {
+        setErrors(data.errors);
+          console.log(errors)
+        } 
+    })
       }, [spotId, errors, closeModal]);
 
       if(spot.image)spotImages.push(spot.image)
