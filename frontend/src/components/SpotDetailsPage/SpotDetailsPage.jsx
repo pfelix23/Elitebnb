@@ -8,6 +8,7 @@ import { useModal } from "../../context/Modal";
 import ReviewFormModal from "../ReviewFormModal/ReviewFormModal";
 import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
 import { getSpotDetails } from "../../store/spots";
+import { useDispatch } from "react-redux";
 
 function SpotDetails() {
     const [spot, setSpot] = useState({});     
@@ -16,8 +17,11 @@ function SpotDetails() {
     const {spotId} = useParams() 
     const { setModalContent, closeModal } = useModal();
     const spotImages = []
+    const dispatch = useDispatch()
 
     const sessionUser = useSelector((state) => state.session.user);
+
+    const userId = sessionUser.id
 
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
@@ -52,7 +56,7 @@ function SpotDetails() {
           console.log(errors)
         } 
     })
-      }, [spotId, errors, closeModal]);
+      }, [dispatch, errors, closeModal, userId]);
 
       if(spot.image)spotImages.push(spot.image)
       if(spot.image1)spotImages.push(spot.image1)

@@ -2,7 +2,6 @@ import './Spots.css'
 import { IoStarSharp } from "react-icons/io5";
 import { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { allSpots } from '../../store/spots';
 
 function Spots() {
     const [spots, setSpots] = useState([]);   
@@ -10,15 +9,20 @@ function Spots() {
     const navigate = useNavigate()    
     
     useEffect(() => {
-      dispatch(allSpots(userId))
-    .catch(async (res) => {
-      const data = await res.json();
-      setSpots(data)
-        if (data && data.errors) {
-        setErrors(data.errors);
-          console.log(errors)
-        } 
-    })
+      fetch('/api/spots')  
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setSpots(data.Spots); 
+        })
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) {
+            setErrors(data.errors);
+            console.log(errors)
+          }
+        });
     }, [errors]);  
 
     
