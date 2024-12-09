@@ -65,7 +65,7 @@ const getCurrentSpots = (spots) => {
 }
 
 export const getReviews = (spotId) => async (dispatch) => {
-    const response = await fetch(`/api/spots/${spotId}/reviews`, {
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'GET'
     });
     const data = await response.json()
@@ -74,7 +74,7 @@ export const getReviews = (spotId) => async (dispatch) => {
 }
 
 export const allSpots = () => async (dispatch) => {
-    const response = await fetch("/api/spots", {
+    const response = await csrfFetch("/api/spots", {
         method: 'GET'
     });
     const data = await response.json()
