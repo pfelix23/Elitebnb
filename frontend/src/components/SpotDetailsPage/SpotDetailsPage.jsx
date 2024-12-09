@@ -27,7 +27,7 @@ function SpotDetails() {
       };
 
     useEffect(() => {
-        fetch(`http://localhost:8000/api/spots/${spotId}/reviews`)
+        fetch(`/api/spots/${spotId}/reviews`)
           .then((res) => {
            return res.json();
           }).then((data) => {
@@ -42,7 +42,7 @@ function SpotDetails() {
          
 
     useEffect(() => {
-      const fetchSpot =  fetch(`http://localhost:8000/api/spots/${spotId}`)
+      const fetchSpot =  fetch(`/api/spots/${spotId}`)
           .then((res) => {
             return res.json();
           })
