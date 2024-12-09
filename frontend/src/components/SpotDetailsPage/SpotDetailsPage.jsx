@@ -7,8 +7,6 @@ import '../Spots/Spots.css'
 import { useModal } from "../../context/Modal";
 import ReviewFormModal from "../ReviewFormModal/ReviewFormModal";
 import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
-import { getSpotDetails } from "../../store/spots";
-import { useDispatch } from "react-redux";
 
 function SpotDetails() {
     const [spot, setSpot] = useState({});     
@@ -17,11 +15,8 @@ function SpotDetails() {
     const {spotId} = useParams() 
     const { setModalContent, closeModal } = useModal();
     const spotImages = []
-    const dispatch = useDispatch()
 
     const sessionUser = useSelector((state) => state.session.user);
-
-    const userId = sessionUser.id
 
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
@@ -32,7 +27,7 @@ function SpotDetails() {
       };
 
     useEffect(() => {
-        fetch(`/api/spots/${spotId}/reviews`)
+        fetch(`http://localhost:8000/api/spots/${spotId}/reviews`)
           .then((res) => {
            return res.json();
           }).then((data) => {
@@ -47,16 +42,22 @@ function SpotDetails() {
          
 
     useEffect(() => {
-      dispatch(getSpotDetails(userId))
-    .catch(async (res) => {
-      const data = await res.json();
-      setSpot(data)
-        if (data && data.errors) {
-        setErrors(data.errors);
-          console.log(errors)
-        } 
-    })
-      }, [dispatch, errors, closeModal, userId]);
+      const fetchSpot =  fetch(`http://localhost:8000/api/spots/${spotId}`)
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+           setSpot(data.spot);  
+            
+          })
+          .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+              setErrors(data.errors);
+              console.log(errors)
+            }
+          }); fetchSpot
+      }, [spotId, errors, closeModal]);
 
       if(spot.image)spotImages.push(spot.image)
       if(spot.image1)spotImages.push(spot.image1)

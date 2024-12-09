@@ -9,7 +9,7 @@ function Spots() {
     const navigate = useNavigate()    
     
     useEffect(() => {
-      fetch('/api/spots')  
+      fetch('http://localhost:8000/api/spots')  
         .then((res) => {
           return res.json();
         })
