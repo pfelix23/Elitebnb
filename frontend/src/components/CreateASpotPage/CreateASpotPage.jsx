@@ -92,7 +92,7 @@ function CreateASpot() {
              setErrors(data.errors);
              console.log(errors) 
           } 
-        }, navigate(`/spots/${spotId}`));
+        }, navigate(`/`));
     } else
   
     return dispatch(
@@ -113,7 +113,7 @@ function CreateASpot() {
         image3
       } ),
      ).then((data) => {   
-      navigate(`/spots/${data.id}`)
+      navigate(`/`)
       setAddress('');
       setCity('');
       setState ('');
