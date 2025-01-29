@@ -4,28 +4,28 @@
     height: 2.5vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
     margin-left: 2px;
+    border: solid black 2px;  
 }
 
 .create-a-spot-input-1 {
-    width: 91%;
+    width: 100%;
     background-color: rgb(212, 232, 245);
     height: 2.5vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
     margin-left: 4px;
+    border: solid black 2px;  
 }
 .creative-container {
     display: flex;
-    width: 100%;
-    margin-left: 2px;
-    font-family: 'Sour Gummy';
-    
+    width: 23vw;
+    font-family: 'Sour Gummy'; 
 }
 
 .create-a-spot-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;    
+    flex-direction: column;   
 }
 
 .create-a-spot-form {
@@ -37,20 +37,11 @@
 }
 
 #describe {
-    width: 92%;
+    width: 90.5%;
     height: 20vh;
     background-color: rgb(212, 232, 245);
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
-    font-family: 'Sour Gummy';
-
-}
-
-
-.geographic-location-spot-input {
-    background-color: rgb(212, 232, 245);
-    height: 2.5vh;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
-    width: 45%;
+    font-family: 'Roboto';
 
 }
 
@@ -58,62 +49,55 @@
     background-color: rgb(212, 232, 245);
     height: 2.5vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
-    width: 9vw;
     margin-top: 2px;
     border: solid black 2px;
-    margin-left: 14%;
+    width: 97%;
 }
 
 .local-location-city-spot-input {
     background-color: rgb(212, 232, 245);
     height: 2.5vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
-    width: 11.5vw;
     margin-top: 2px;
     border: solid black 2px;  
-    margin-left: -1%;  
+    width: 97%;
 }
 .geographic-container {
     display: flex;    
     justify-content: space-between;
-    width: 23vw;
+    width: 90.5%;
     gap: 10px;
     margin-top: 10px;
     padding-bottom: 10%;
     border-bottom: solid black 2px;
-    border-radius: -3px;
-
 }
 
 .geographic-location-longitude-spot-input {
     background-color: rgb(212, 232, 245);
     height: 2.5vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
-    width: 10vw;
     margin-top: 2px;
     border: solid black 2px;  
+    width: 97%;
 }
 
 .geographic-location-spot-input {
     background-color: rgb(212, 232, 245);
     height: 2.5vh;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
-    width: 10vw;
     margin-top: 2px;
     border: solid black 2px;
-    margin-left: 15px;
+    width: 97%;
 }
 
-.latitude {
-    padding-left: 8%; 
-}
 
 .local-container {
     display: flex;    
     justify-content: space-between;
-    width: 90%;
+    width: 90.5%;
     gap: 10px;
     margin-top: 10px;
+    
 }
 .local-container div {
     width: 48%; 
@@ -124,11 +108,11 @@ label, .p {
     margin-bottom: 5px; 
     font-weight: bold;
     font-family: "Sour Gummy";
-  }
+}
 
 .states {
-    padding-left: 12%;
     font-family: "Sour Gummy";
+    width: 91.5%;
 }
 
 .states.error {
@@ -141,8 +125,8 @@ label, .p {
 }
 
 .address {
-    margin-left: -64%;
     font-family: "Sour Gummy";
+    width: 91.5%;
 }
 
 .address.error {
@@ -155,8 +139,8 @@ label, .p {
 }
 
 .country {
-    margin-left: -77%;
     font-family: "Sour Gummy";
+    width: 91.5%;
 }
 
 .country.error {
@@ -170,6 +154,8 @@ label, .p {
 
 .city {
     font-family: "Sour Gummy";
+    width: 91.5%;
+    margin-left: -2px;
 }
 
 .city.error {
@@ -182,6 +168,7 @@ label, .p {
 
 .longitude {
     font-family: "Sour Gummy";
+    width: 91.5%;
 }
 
 .longitude.error {
@@ -190,6 +177,11 @@ label, .p {
     align-items: flex-end;
     width: 110%;
     font-size: 15px;
+}
+
+.latitude {
+    font-family: "Sour Gummy";
+    width: 91.5%;
 }
 
 .latitude.error {
@@ -201,25 +193,24 @@ label, .p {
 }
 .guests {
     margin-bottom: -1%;
-    margin-left: -2%;
     font-family: "Sour Gummy";
+    width: 23vw;
 }
 
 .guests2 {
     margin-bottom: -1%;
-    margin-left: -5.5%;
     font-family: "Sour Gummy";
+    width: 23vw;
 }
 .features {
     font-family: "Sour Gummy";
-    margin-left: 1.4%;
-    width: 24vw;
+    width: 23vw;
 }
 
 .new-tile-container {
     border-top: solid black 2px;
     margin-top: 7%;
-    width: 95%;
+    width: 23vw;
     border-radius: 3px;
 }
 .new-tile {
@@ -232,7 +223,8 @@ label, .p {
     display: flex;
     justify-content: flex-start;
     font-family: "Sour Gummy";
-    width: 24vw;
+    width: 23vw;
+    margin-top: -2%;
 }
 
 .attention {
@@ -240,7 +232,7 @@ label, .p {
     justify-content: flex-start;
     font-family: "Sour Gummy";
     margin-top: -11px;
-    margin-left: 2%;
+    width: 23vw;    
 }
 
 .create-a-spot-button {

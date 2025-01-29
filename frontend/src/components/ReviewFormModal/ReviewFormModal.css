@@ -13,7 +13,7 @@
 
   }
 
-  .submit-review:disabled {
+.submit-review:disabled {
     width: 90%;
     height: 100%;
     box-shadow: grey 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
@@ -29,19 +29,19 @@
   cursor: pointer;
 }
 
-  #submitReview {
-    width: 90%;
-    height: 20vh;
-    background-color: rgb(212, 232, 245);
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, black 0px 0px 0px 2px;
-    font-family: 'Sour Gummy';
-    margin-top: -2%;
-  }
+#submitReview {
+  width: 90%;
+  height: 20vh;
+  background-color: rgb(212, 232, 245);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, black 0px 0px 0px 2px;
+  font-family: 'Sour Gummy';
+  margin-top: -2%;
+}
 
 .submitReviewContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .star-container {
@@ -117,4 +117,22 @@
   position:relative;
   top:0px;
   left:0px; 
+}
+
+.review-form2 {
+  height: 38vh;
+  width: 28vw;
+  border-radius: 50px;  
+}
+
+.review-container2 {
+  width: 28vw;
+  border-radius: 50px;  
+}
+
+.review-text-head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Sour Gummy';
 }

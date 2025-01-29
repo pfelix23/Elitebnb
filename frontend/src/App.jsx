@@ -8,6 +8,7 @@ import * as sessionActions from './store/session';
 import Spots from './components/Spots/Spots';
 import SpotDetailsPage from './components/SpotDetailsPage/SpotDetailsPage';
 import UserSpotsPage from './components/UserSpots/UserSpotsPage';
+import UserReviewsPage from './components/UserReviews/UserReviewsPage';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -52,7 +53,10 @@ const router = createBrowserRouter([
         path: "/spots/:userId/current",
         element: <UserSpotsPage />
       },
-      
+      {
+        path: "/reviews/current",
+        element: <UserReviewsPage />
+      },
 
     ]
   }

@@ -145,7 +145,7 @@ function CreateASpot() {
         <div className='create-a-spot-container'>
           <h1 className="create-a-spot-text"> {spot ? "Update your" : "Create a new"} Spot</h1>
           <h2 className="guests">Where&apos;s your place located?</h2>
-          <h4 className='features'>Guests will only get your exact address once they booked a reservation</h4>
+          <h4 className='features'>Guests will only get your exact address once they booked a reservation.</h4>
           <form onSubmit={handleSubmit} className='create-a-spot-form'>
             <label htmlFor="country" className={`country ${errors.country ? 'error' : ''}`}>Country {errors.country && (
           <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'3%', marginBottom: '-.3%'}}>{errors.country}</p>
@@ -156,8 +156,7 @@ function CreateASpot() {
               placeholder='Country'
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              
-              
+              required             
             />
             <br />
             <label htmlFor="address" className={`address ${errors.address ? 'error' : ''}`}>Street Address {errors.address && (
@@ -169,7 +168,7 @@ function CreateASpot() {
               placeholder='Address'
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              
+              required              
             />
             
             <div className='local-container'>
@@ -183,7 +182,7 @@ function CreateASpot() {
                   placeholder='City'
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  
+                  required                  
                   id="city"
                 />
               </div>
@@ -197,7 +196,8 @@ function CreateASpot() {
                   placeholder='State'
                   value={state}
                   onChange={(e) => setState(e.target.value)}
-                  id="state"                  
+                  id="state"  
+                  required                
                 />
               </div>
             </div>
@@ -214,6 +214,7 @@ function CreateASpot() {
                   value={lng}
                   onChange={(e) => setLng(e.target.value)}
                   id="Longitude"
+                  required
                 />
               </div>
               <div>
@@ -227,13 +228,14 @@ function CreateASpot() {
                   value={lat}
                   onChange={(e) => setLat(e.target.value)}
                   id="Latitude"
+                  required
                 />
               </div>
             </div>
 
             <h2 className='guests2'>Describe your place to guests</h2>
             <h4 className='features'>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</h4>
-            <textarea onChange={(e) => setDescription(e.target.value)} value={description} name="describe-to-guests" id="describe" placeholder="Please write at least 30 characters"> </textarea>
+            <textarea required onChange={(e) => setDescription(e.target.value)} value={description} name="describe-to-guests" id="describe" placeholder="Please write at least 30 characters."> </textarea>
             {errors.description && (
                 <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'-54%', marginTop: '1%', fontSize:'15px', fontWeight:'bold'}}>{errors.description}</p>
               )}
@@ -248,6 +250,7 @@ function CreateASpot() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               id='name'
+              required
             />
             {errors.name && (
                 <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'-21.5%', marginTop: '2%', fontSize:'15px', fontWeight:'bold'}}>{errors.name}</p>
@@ -263,13 +266,14 @@ function CreateASpot() {
               placeholder='Price per night (USD)'
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              required
             />
             </div>
             {errors.price && (
                 <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'-18.5%', marginTop: '2%', fontSize:'15px', fontWeight:'bold'}}>{errors.price}</p>
               )}
             <div className='new-tile-container'>
-            <h2 className='new-tile'>Liven up your spot with photos</h2>
+            <h2 className='new-tile'>Liven your spot with photos</h2>
             </div>
             <h4 className='new-tile2'>Submit a link to at least one photo to publish your spot.</h4>
             <input
@@ -290,6 +294,7 @@ function CreateASpot() {
               placeholder='Image URL'
               value={image}
               onChange={(e) => setImage(e.target.value)}
+              required
               
             />
             <br />
@@ -299,6 +304,7 @@ function CreateASpot() {
               placeholder='Image URL'
               value={image1}
               onChange={(e) => setImage1(e.target.value)}
+              required
               
             />
             <br />
@@ -308,6 +314,7 @@ function CreateASpot() {
               placeholder='Image URL'
               value={image2}
               onChange={(e) => setImage2(e.target.value)}
+              required
               
             />
             <br />
@@ -317,6 +324,7 @@ function CreateASpot() {
               placeholder='Image URL'
               value={image3}
               onChange={(e) => setImage3(e.target.value)}
+              required
               
             />
             <br />

@@ -1,5 +1,5 @@
 const express = require('express');
-const { Spot } = require('../../db/models');
+const { Spot, sequelize } = require('../../db/models');
 const { ReviewImage } = require('../../db/models');
 const { User } = require('../../db/models');
 const { Review } = require('../../db/models');
@@ -80,7 +80,8 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
     const reviewId = req.params.reviewId;
     const {review, stars} = req.body
     const id = parseInt(reviewId);
-    const theReviewed = await Review.findByPk(id)
+    const theReviewed = await Review.findByPk(id, {include: {model: Spot}})
+    const spotId = theReviewed.Spot.id
     
     if(!theReviewed) {
        return res.status(404).json({
@@ -120,7 +121,28 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
         }
     })
 
-    res.json(reviewed);
+    const allReviews = await Review.findAll({
+            where: { spotId: spotId },
+            attributes: [[sequelize.fn('avg', sequelize.col('stars')), 'avgRating']]
+        });
+    
+        
+        const avgRating = allReviews[0].get('avgRating');
+    
+        const limitAvgRating = parseFloat(avgRating).toFixed(2);
+    
+       
+        await Spot.update(
+            {
+                avgRating: limitAvgRating
+            },
+            {
+                where: { id: spotId }
+            }
+        );
+    
+
+    res.status(200).json(reviewed);
     
 
 });
