@@ -305,20 +305,20 @@ label, .p {
         width: 95%;
     }
     .local-location-city-spot-input {
-        width: 104.5%;
-        margin-left: -2.6%;
+        width: 100.5%;
+        margin-left: .2%;
     }
     .local-location-spot-input {
-        width: 104.5%;
-        margin-left: -2.6%;
+        width: 100.5%;
+        margin-left: .2%;
     }
     .geographic-location-longitude-spot-input {
-        width: 104.5%;
-        margin-left: -2.6%;
+        width: 100.5%;
+        margin-left: .2%;
     }
     .geographic-location-spot-input {
-        width: 104.5%;
-        margin-left: -2.6%;
+        width: 100.5%;
+        margin-left: .2%;
     }
     .create-a-spot-button {
         font-size: 1.2rem;
@@ -366,20 +366,20 @@ label, .p {
         width: 95%;
     }
     .local-location-city-spot-input {
-        width: 104.5%;
-        margin-left: -2.6%;
+        width: 100.5%;
+        margin-left: .2%;
     }
     .local-location-spot-input {
-        width: 104.5%;
-        margin-left: -2.6%;
+        width: 100.5%;
+        margin-left: .2%;
     }
     .geographic-location-longitude-spot-input {
-        width: 104.5%;
-        margin-left: -2.6%;
+        width: 100.5%;
+        margin-left: .2%;
     }
     .geographic-location-spot-input {
-        width: 104.5%;
-        margin-left: -2.6%;
+        width: 100.5%;
+        margin-left: .2%;
     }
     .create-a-spot-button {
         font-size: 1.2rem;
@@ -427,20 +427,20 @@ label, .p {
         width: 95%;
     }
     .local-location-city-spot-input {
-        width: 104.5%;
-        margin-left: -2.6%;
+        width: 100.5%;
+        margin-left: .2%;
     }
     .local-location-spot-input {
-        width: 104.5%;
-        margin-left: -2.6%;
+         width: 100.5%;
+        margin-left: .2%;
     }
     .geographic-location-longitude-spot-input {
-        width: 104.5%;
-        margin-left: -2.6%;
+         width: 100.5%;
+        margin-left: .2%;
     }
     .geographic-location-spot-input {
-        width: 104.5%;
-        margin-left: -2.6%;
+         width: 100.5%;
+        margin-left: .2%;
     }
     .create-a-spot-button {
         font-size: 1.2rem;
@@ -462,7 +462,7 @@ label, .p {
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 440px) {
     .guests {
         width: 50%;
     }
@@ -489,19 +489,19 @@ label, .p {
     }
     .local-location-city-spot-input {
         width: 104.5%;
-        margin-left: -2.6%;
+        margin-left: -3.2%;
     }
     .local-location-spot-input {
         width: 104.5%;
-        margin-left: -2.6%;
+        margin-left: -3.2%;
     }
     .geographic-location-longitude-spot-input {
         width: 104.5%;
-        margin-left: -2.6%;
+        margin-left: -3.2%;
     }
     .geographic-location-spot-input {
         width: 104.5%;
-        margin-left: -2.6%;
+        margin-left: -3.2%;
     }
     .create-a-spot-button {
         font-size: 1.2rem;
@@ -524,18 +524,6 @@ label, .p {
 }
 
 @media (max-width: 440px) {
-    .local-location-city-spot-input {
-        margin-left: -3.7%;
-    }
-    .local-location-spot-input {
-        margin-left: -3.7%;
-    }
-    .geographic-location-longitude-spot-input {
-        margin-left: -3.7%;
-    }
-    .geographic-location-spot-input {
-        margin-left: -3.7%;
-    }
     .login-button-container {
         width: 60vw;
     }

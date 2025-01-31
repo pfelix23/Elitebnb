@@ -356,3 +356,9 @@
     margin-left: -.1px;
   }
 }
+
+@media (min-width: 441px) {
+  .button-box-2{
+   display: none;
+  }
+}
