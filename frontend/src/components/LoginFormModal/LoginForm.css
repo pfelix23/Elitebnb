@@ -8,6 +8,7 @@
 .login-container {
     border-radius: 50px;
     height: 49vh;
+    min-height: 234px;
 }
 
 .username-input {
@@ -83,4 +84,40 @@
     align-items: center;
     font-family: 'Sour Gummy';
 }
+
+#Signup {
+    color: rgb(52, 52, 172);
+    margin-left: -4px;
+}
+
+#Signup:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.no-account {
+    display: flex;
+    justify-content: center;
+    font-family: 'Sour Gummy';
+}
+
+@media (max-width: 1058px) {
+    .no-account {
+        opacity: 0;
+    }
+}
+
+@media (max-height: 656px) {
+    .no-account {
+        opacity: 0;
+    }
+}
+
+@media (max-height: 574px) {
+    .demo-user {
+        opacity: 0;
+    }
+}
+
+
 

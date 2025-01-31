@@ -3,7 +3,7 @@ import * as spotsActions from '../../store/spots';
 import * as reviewsActions from '../../store/reviews';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import './ReviewFormModal.css'
+import './ReviewFormModal.css';
 
 function ReviewFormModal({spotId, userHasReviewed, spot, reviewId}) {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ function ReviewFormModal({spotId, userHasReviewed, spot, reviewId}) {
     if(userHasReviewed) {
       setReview(userHasReviewed.review);
       setStars(parseInt(userHasReviewed.stars));
-    };
+    }
   }, [userHasReviewed])
   
   

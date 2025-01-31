@@ -3,20 +3,20 @@ import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import { LuDot } from "react-icons/lu";
-import '../Spots/Spots.css'
 import { useModal } from "../../context/Modal";
 import ReviewFormModal from "../ReviewFormModal/ReviewFormModal";
 import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
 import { csrfFetch } from "../../store/csrf";
+import '../Spots/Spots.css';
 
 
 function SpotDetails() {
     const [spot, setSpot] = useState({});     
     const [errors, setErrors] = useState(null);   
-    const [reviews, setReviews] = useState(null)
-    const {spotId} = useParams() 
+    const [reviews, setReviews] = useState(null);
+    const {spotId} = useParams() ;
     const { setModalContent, closeModal } = useModal();
-    const spotImages = []
+    const spotImages = [];
 
     const sessionUser = useSelector((state) => state.session.user);
 
@@ -121,7 +121,7 @@ return (
           <div className="section-2">
           <div className="info-button-container">
           <div className="info-box"><h2>Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2><p style={{fontFamily:'Roboto', fontWeight:'bold'}}>{spot.description}</p></div>
-          <div className="button-box"><div className="spot-info"><h2>${spot.price} night</h2> <h3 style={{marginTop:'7.5%'}}><ImStarFull />&nbsp;{spot.avgRating || "New"}{spot.numReviews && spot.numReviews > 0 ? <span><LuDot />{spot.numReviews === 1 ? "1 review" : `${spot.numReviews} reviews`}</span>: ""} </h3> </div><div className="box-of-button"><button className="reserve" onClick={() => alert("Feature Coming Soon")}>Reserve</button></div></div>
+          <div className="button-box"><div className="spot-info"><h2 className="price">${spot.price} night</h2> <h3 className="review-info" style={{marginTop:'7.5%'}}><ImStarFull />&nbsp;{spot.avgRating || "New"}{spot.numReviews && spot.numReviews > 0 ? <span><LuDot />{spot.numReviews === 1 ? "1 review" : `${spot.numReviews} reviews`}</span>: ""} </h3> </div><div className="box-of-button"><button className="reserve" onClick={() => alert("Feature Coming Soon")}>Reserve</button></div></div>
           </div>
           </div>
           <div>
@@ -145,6 +145,4 @@ return (
       );
     }
     
-    
-
-  export default SpotDetails
+export default SpotDetails

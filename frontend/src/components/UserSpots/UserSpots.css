@@ -29,8 +29,7 @@
     height: 3vh;
     font-weight: bolder;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, black 0px 0px 0px 3px;
-    margin-right: 5%;
-   
+    margin-right: 5%;   
   }
   
   .update-button-manage-spots:hover {
@@ -64,4 +63,10 @@
 
   .create-a-spot-manage-spots:hover {
     cursor: pointer;
+  }
+
+  @media (max-width: 480px) {
+    .update-button-manage-spots {
+      margin-right: 10px;
+    }
   }

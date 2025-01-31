@@ -2,6 +2,7 @@ import { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
+import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import './LoginForm.css';
 
 function LoginFormModal() {
@@ -9,7 +10,7 @@ function LoginFormModal() {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
+  const { closeModal, setModalContent } = useModal();
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,6 +49,10 @@ function LoginFormModal() {
           console.log(errors)
         }
       });
+  };
+
+  const openSignupForm = () => {
+    setModalContent(<SignupFormModal closeModal={closeModal} />);
   };
 
   return (
@@ -97,6 +102,8 @@ function LoginFormModal() {
         onClick={handleDemoUser}
         >Demo User</h3>
         </div>
+        <br />
+        <div className='no-account'>Don&apos;t have an account? &nbsp;<div id='Signup' onClick={openSignupForm}>Sign up here</div></div>
       </form>
     </div>
   );

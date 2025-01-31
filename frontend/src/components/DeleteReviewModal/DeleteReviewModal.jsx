@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as reviewActions from '../../store/reviews';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import './DeleteReviewModal.css'
+import './DeleteReviewModal.css';
 
 
 function DeleteReviewModal({reviewId}) {

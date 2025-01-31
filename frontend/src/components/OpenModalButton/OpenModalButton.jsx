@@ -1,5 +1,5 @@
 import { useModal } from '../../context/Modal';
-import '../LoginFormModal/LoginForm.css'
+import '../LoginFormModal/LoginForm.css';
 
 function OpenModalButton({
   modalComponent, 

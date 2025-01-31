@@ -1,5 +1,4 @@
 const express = require('express');
-const { User } = require('../../db/models');
 const { Spot } = require('../../db/models');
 const { Booking } = require('../../db/models');
 const { Op } = require('sequelize');
@@ -72,7 +71,7 @@ router.put('/:bookingId/edit', requireAuth, async (req, res) => {
            errors: {
            startDate: "Start date conflicts with an existing booking",
            endDate: "End date conflicts with an existing booking"
-  } 
+            } 
         })
     }
      await Booking.update({startDate, endDate},

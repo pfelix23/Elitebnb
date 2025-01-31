@@ -3,17 +3,18 @@ import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton/OpenModalButton';
 import LoginFormModal from '../LoginFormModal/LoginFormModal';
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import './Navigation.css';
 import { PiUserFill } from "react-icons/pi";
 import { AiOutlineMenu } from "react-icons/ai";
+import './Navigation.css';
 
 
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -43,7 +44,9 @@ function Navigation({ isLoaded }) {
       <ProfileButton user={sessionUser} />
      </div>
     );
-   } 
+  }
+
+  const cameFromUpdate = location.state?.fromUpdate;
 
   return (
     <div className='root-div'>
@@ -80,7 +83,7 @@ function Navigation({ isLoaded }) {
                 </>
               )}
             </div>
-          )} {sessionUser && (
+          )} {sessionUser && !cameFromUpdate && (
             <div className='new-spot' onClick={() => navigate('/spots/create')}><h3>Create a New Spot</h3></div>
           )}
         </div>

@@ -540,7 +540,6 @@ if(minPrice || maxPrice) {
 
 router.get('/:userId/current', requireAuth, async (req, res) => {
     const ownerId = req.user.id
-    console.log(ownerId)
     
     const spots = await Spot.findAll({
       where: {

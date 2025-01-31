@@ -29,6 +29,12 @@
     align-items: center;
 }
 
+@media (max-width: 623px) {
+    .Elmur-Fudd {
+        opacity: 0;
+    }
+}
+
 .Elmur-Fudd:hover {
     cursor: pointer;
 }
@@ -126,10 +132,7 @@
     width: 13px;
     padding: 6px;
     background-color:grey;
-    color: white;
-    
-    
-    
+    color: white;    
 }
 
 .cgmenu {
@@ -181,22 +184,23 @@
     font-family: "Sour Gummy";
     font-weight: 100;
     color: rgb(38, 101, 126);
-  }
+}
 
-  .new-spot:hover {
-    cursor: pointer;
-  }
+.new-spot:hover {
+cursor: pointer;
+color: rgb(29, 78, 97);
+}
 
-  .manage-spots {
-    height: 12%; 
-    font-family: 'Sour Gummy';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.manage-spots {
+height: 12%; 
+font-family: 'Sour Gummy';
+display: flex;
+justify-content: center;
+align-items: center;
+}
 
-  .manage-spots:hover {
-    cursor: pointer;
-  }
+.manage-spots:hover {
+cursor: pointer;
+}
 
 

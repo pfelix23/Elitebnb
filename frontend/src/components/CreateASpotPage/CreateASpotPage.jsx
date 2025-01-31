@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import * as spotsActions from '../../store/spots';
-import './CreateASpot.css'
+import './CreateASpot.css';
 
 function CreateASpot() {
   const dispatch = useDispatch()
@@ -22,7 +22,7 @@ function CreateASpot() {
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
   const [errors, setErrors] = useState({});
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const location = useLocation();
   const spot = location.state?.spot;
@@ -39,10 +39,10 @@ function CreateASpot() {
         setDescription(spot.description);
         setPrice(spot.price);
         setPreviewImage(spot.previewImage);
-        setImage(spot.image)
-        setImage1(spot.image1)
-        setImage2(spot.image2)
-        setImage3(spot.image3)
+        setImage(spot.image);
+        setImage1(spot.image1);
+        setImage2(spot.image2);
+        setImage3(spot.image3);
       
     }
 }, [spot]);
@@ -52,7 +52,6 @@ function CreateASpot() {
     setErrors({}); 
 
     if(spot) {
-       const spotId = spot.id
       return dispatch(spotsActions.update(spot.id, {
         address,
         city,
@@ -112,7 +111,7 @@ function CreateASpot() {
         image2,
         image3
       } ),
-     ).then((data) => {   
+     ).then(() => {   
       navigate(`/`)
       setAddress('');
       setCity('');
@@ -234,7 +233,7 @@ function CreateASpot() {
             </div>
 
             <h2 className='guests2'>Describe your place to guests</h2>
-            <h4 className='features'>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</h4>
+            <h4 className='features2'>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</h4>
             <textarea required onChange={(e) => setDescription(e.target.value)} value={description} name="describe-to-guests" id="describe" placeholder="Please write at least 30 characters."> </textarea>
             {errors.description && (
                 <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'-54%', marginTop: '1%', fontSize:'15px', fontWeight:'bold'}}>{errors.description}</p>
@@ -339,7 +338,7 @@ function CreateASpot() {
    </form>
  </div>
       );
-    }
+}
     
     
 

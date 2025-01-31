@@ -1,8 +1,7 @@
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import './Navigation.css'
 import { useNavigate } from 'react-router-dom';
-import { useModal } from '../../context/Modal';
+import './Navigation.css';
 
 
 function ProfileButton({ user }) {

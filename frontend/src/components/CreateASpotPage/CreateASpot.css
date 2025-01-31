@@ -207,6 +207,11 @@ label, .p {
     width: 23vw;
 }
 
+.features2 {
+    font-family: "Sour Gummy";
+    width: 23vw;
+}
+
 .new-tile-container {
     border-top: solid black 2px;
     margin-top: 7%;
@@ -264,3 +269,247 @@ label, .p {
     width: 23vw;
     margin-bottom: -1px;
   }
+
+  @media screen and (max-width: 1200px) {
+    .guests {
+        width: 50%;
+    }
+    .guests2 {
+        width: 95%;
+    }
+    .features {
+        width: 50%;
+    }
+    .features2 {
+        width: 95%;
+    }
+    .create-a-spot-form {
+        width: 50vw;
+    }
+    .create-a-spot-text {
+        width: 50%;
+    }
+    .create-a-spot-container {
+        padding: 1rem;
+    }
+    .create-a-spot-input, .create-a-spot-input-1, .creative-container, .new-tile2 {
+        width: 95%;
+    }
+    .local-location-city-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .local-location-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .geographic-location-longitude-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .geographic-location-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .create-a-spot-button {
+        font-size: 1.2rem;
+    }
+    .create-a-spot-text {
+        font-size: 1.3rem;
+    }
+    .local-container, .geographic-container {
+        flex-direction: column;
+    }
+    .local-container div, .geographic-container div {
+        width: 100%;
+    }
+    .new-tile-container {
+        width: 95%;
+    }
+    .attention {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .guests {
+        width: 50%;
+    }
+    .guests2 {
+        width: 95%;
+    }
+    .features {
+        width: 50%;
+    }
+    .features2 {
+        width: 95%;
+    }
+    .create-a-spot-form {
+        width: 50vw;
+    }
+    .create-a-spot-text {
+        width: 50%;
+    }
+    .create-a-spot-container {
+        padding: 1rem;
+    }
+    .create-a-spot-input, .create-a-spot-input-1, .creative-container, .new-tile2 {
+        width: 95%;
+    }
+    .local-location-city-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .local-location-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .geographic-location-longitude-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .geographic-location-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .create-a-spot-button {
+        font-size: 1.2rem;
+    }
+    .create-a-spot-text {
+        font-size: 1.3rem;
+    }
+    .local-container, .geographic-container {
+        flex-direction: column;
+    }
+    .local-container div, .geographic-container div {
+        width: 100%;
+    }
+    .new-tile-container {
+        width: 95%;
+    }
+    .attention {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .guests {
+        width: 50%;
+    }
+    .guests2 {
+        width: 95%;
+    }
+    .features {
+        width: 50%;
+    }
+    .features2 {
+        width: 95%;
+    }
+    .create-a-spot-form {
+        width: 50vw;
+    }
+    .create-a-spot-text {
+        width: 50%;
+    }
+    .create-a-spot-container {
+        padding: 1rem;
+    }
+    .create-a-spot-input, .create-a-spot-input-1, .creative-container, .new-tile2 {
+        width: 95%;
+    }
+    .local-location-city-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .local-location-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .geographic-location-longitude-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .geographic-location-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .create-a-spot-button {
+        font-size: 1.2rem;
+    }
+    .create-a-spot-text {
+        font-size: 1.3rem;
+    }
+    .local-container, .geographic-container {
+        flex-direction: column;
+    }
+    .local-container div, .geographic-container div {
+        width: 100%;
+    }
+    .new-tile-container {
+        width: 95%;
+    }
+    .attention {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .guests {
+        width: 50%;
+    }
+    .guests2 {
+        width: 95%;
+    }
+    .features {
+        width: 50%;
+    }
+    .features2 {
+        width: 95%;
+    }
+    .create-a-spot-form {
+        width: 50vw;
+    }
+    .create-a-spot-text {
+        width: 50%;
+    }
+    .create-a-spot-container {
+        padding: 1rem;
+    }
+    .create-a-spot-input, .create-a-spot-input-1, .creative-container, .new-tile2 {
+        width: 95%;
+    }
+    .local-location-city-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .local-location-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .geographic-location-longitude-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .geographic-location-spot-input {
+        width: 104.5%;
+        margin-left: -2.6%;
+    }
+    .create-a-spot-button {
+        font-size: 1.2rem;
+    }
+    .create-a-spot-text {
+        font-size: 1.3rem;
+    }
+    .local-container, .geographic-container {
+        flex-direction: column;
+    }
+    .local-container div, .geographic-container div {
+        width: 100%;
+    }
+    .new-tile-container {
+        width: 95%;
+    }
+    .attention {
+        width: 95%;
+    }
+}
