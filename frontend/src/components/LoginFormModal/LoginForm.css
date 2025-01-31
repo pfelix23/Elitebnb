@@ -4,7 +4,7 @@
     border-radius: 50px;    
 }
 
-@media (max-width: 376px) {
+@media (max-width: 440px) {
     .login-form {
       width: 50vw;
       display: flex;

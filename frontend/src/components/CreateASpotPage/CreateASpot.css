@@ -514,7 +514,7 @@ label, .p {
     }
 }
 
-@media (max-width: 376px) {
+@media (max-width: 440px) {
     .local-location-city-spot-input {
         margin-left: -3.7%;
     }

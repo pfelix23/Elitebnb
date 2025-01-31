@@ -320,20 +320,20 @@
   }
 }
 
-@media (max-width: 376px) {
+@media (max-width: 440px) {
   .manage-spots-button-container {
     margin-right: 12%;
   }
 }
 
-@media (max-width: 376px) {
+@media (max-width: 440px) {
   .button-box{
     opacity: 0;
     pointer-events: none;
   }
 }
 
-@media (max-width: 376px) {
+@media (max-width: 440px) {
   .button-box-2{
     opacity: 100%;
     display: flex;

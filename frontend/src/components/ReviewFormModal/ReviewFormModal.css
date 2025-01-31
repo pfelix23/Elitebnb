@@ -130,13 +130,14 @@
   border-radius: 50px;  
 }
 
-@media (max-width: 376px) {
+@media (max-width: 440px) {
   .review-container2 {
     width: 90vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
   }
   .submitReviewContainer {
     width: 90vw;

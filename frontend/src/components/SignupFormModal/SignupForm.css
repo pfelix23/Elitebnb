@@ -5,7 +5,7 @@
     padding-bottom: 5%;    
 }
 
-@media (max-width: 376px) {
+@media (max-width: 440px) {
     .signup-form {
       width: 50vw;
       display: flex;
