@@ -6,7 +6,7 @@
 
 @media (max-width: 440px) {
     .login-form {
-      width: 50vw;
+      width: 90vw;
       display: flex;
       flex-direction: column;
       justify-content: center;

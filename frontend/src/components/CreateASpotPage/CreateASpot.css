@@ -7,6 +7,15 @@
     border: solid black 2px;  
 }
 
+.create-a-spot-input-3 {
+    width: 90%;
+    background-color: rgb(212, 232, 245);
+    height: 2.5vh;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 1px, rgb(51, 51, 51) 0px 0px 0px 1px;
+    margin-left: 2px;
+    border: solid black 2px;  
+}
+
 .create-a-spot-input-1 {
     width: 100%;
     background-color: rgb(212, 232, 245);
@@ -529,5 +538,8 @@ label, .p {
     }
     .login-button-container {
         width: 60vw;
+    }
+    .create-a-spot-input-3 {
+        width: 95%;
     }
   }

@@ -150,7 +150,7 @@ function CreateASpot() {
           <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'3%', marginBottom: '-.3%'}}>{errors.country}</p>
         )}</label>
             <input
-              className='create-a-spot-input'
+              className='create-a-spot-input-3'
               type="text"
               placeholder='Country'
               value={country}
@@ -162,7 +162,7 @@ function CreateASpot() {
           <p style={{color: 'red', fontFamily:'Sour Gummy', marginLeft:'3%', marginBottom: '-.3%'}}>{errors.address}</p>
         )}</label>
             <input
-              className='create-a-spot-input'
+              className='create-a-spot-input-3'
               type="text"
               placeholder='Address'
               value={address}
