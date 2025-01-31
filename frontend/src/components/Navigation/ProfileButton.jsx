@@ -25,6 +25,7 @@ function ProfileButton({ user }) {
             <div><h4 style={{ fontFamily: 'Sour Gummy', display:'flex', justifyContent:'center', alignItems: 'center'}}>{user.email}</h4></div>
             <div style={{borderTop: 'solid black 2px', marginBottom: '-8%'}} ><h4 className='manage-spots' onClick={() => navigate('/spots/:spotId/current')} >Manage Spots</h4></div>
             <div style={{borderBottom:'solid black 2px'}} ><h4 className='manage-spots' onClick={() => navigate('/reviews/current')} >Manage Reviews</h4></div>
+            <div className='add-spots-div' style={{borderBottom:'solid black 2px'}} ><h4 className='add-spots' onClick={() => navigate('/spots/create')} >Create a New Spot</h4></div>
             <div className='logout-button-container'>
               <button onClick={logout} className='logout-button'>Log Out</button>
             </div>

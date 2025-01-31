@@ -32,6 +32,7 @@
 @media (max-width: 623px) {
     .Elmur-Fudd {
         opacity: 0;
+        pointer-events: none;
     }
 }
 
@@ -201,6 +202,44 @@ align-items: center;
 
 .manage-spots:hover {
 cursor: pointer;
+}
+
+@media (max-width: 376px) {
+    .new-spot {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .add-spots {
+        opacity:100% ;
+        font-family: 'Sour Gummy';
+        display: flex;
+        justify-content: center;
+    }
+    .Elmur-Fudd {
+        pointer-events: none;
+        opacity: 0;
+    }
+}
+
+@media (max-width: 410px) {
+    .new-spot {
+        display: none;
+    }
+    .add-spots {
+        opacity:100% ;
+        font-family: 'Sour Gummy';
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 411px) {
+    .add-spots {
+        display: none;          
+    }
+    .add-spots-div {
+        display: none;
+    }
 }
 
 

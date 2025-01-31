@@ -53,3 +53,16 @@
 .confirm-text {
     margin-left: 3%;
 }
+
+@media (max-width: 376px) {
+  .delete-container {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .delete-button-container {
+    width: 90vw;
+  }
+}

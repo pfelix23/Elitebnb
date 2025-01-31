@@ -513,3 +513,21 @@ label, .p {
         width: 95%;
     }
 }
+
+@media (max-width: 376px) {
+    .local-location-city-spot-input {
+        margin-left: -3.7%;
+    }
+    .local-location-spot-input {
+        margin-left: -3.7%;
+    }
+    .geographic-location-longitude-spot-input {
+        margin-left: -3.7%;
+    }
+    .geographic-location-spot-input {
+        margin-left: -3.7%;
+    }
+    .login-button-container {
+        width: 60vw;
+    }
+  }

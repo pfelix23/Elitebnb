@@ -130,6 +130,28 @@
   border-radius: 50px;  
 }
 
+@media (max-width: 376px) {
+  .review-container2 {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .submitReviewContainer {
+    width: 90vw;
+    margin-left: -111%
+  }
+  .star-container {
+    width: 90vw;
+    margin-left: -124%
+  }
+  .review-button-div {
+    width: 50vw;
+    margin-left: -35%
+  }
+}
+
 .review-text-head {
   display: flex;
   justify-content: center;

@@ -54,3 +54,16 @@
 .confirm-review-text {
     margin-left: 9%;
 }
+
+@media (max-width: 376px) {
+  .delete-review-container {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .delete-review-button-container {
+    width: 90vw;
+  }
+}

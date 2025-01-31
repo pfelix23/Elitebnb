@@ -125,6 +125,7 @@ return (
           </div>
           </div>
           <div>
+          <div className="button-box-2"><div className="spot-info-2"><h2 className="price-2">${spot.price} night</h2> <h3 className="review-info-2" style={{marginTop:'7.5%'}}><ImStarFull />&nbsp;{spot.avgRating || "New"}{spot.numReviews && spot.numReviews > 0 ? <span><LuDot />{spot.numReviews === 1 ? "1 review" : `${spot.numReviews} reviews`}</span>: ""} </h3> </div><div className="box-of-button-2"><button className="reserve" onClick={() => alert("Feature Coming Soon")}>Reserve</button></div></div>
           <h2 className="review-head"><ImStarFull />&nbsp;{spot.avgRating || "New"}{spot.numReviews && spot.numReviews > 0 ? <span><LuDot />{spot.numReviews === 1 ? "1 review" : `${spot.numReviews} reviews`}</span>: ""} </h2>
             {sessionUser && sessionUser.id !== spot.ownerId && !userHasReviewed && (<button className="review-button" onClick={openReviewForm} >Post Your Review</button>)}
             
