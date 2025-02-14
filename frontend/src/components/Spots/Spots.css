@@ -324,6 +324,9 @@
   .manage-spots-button-container {
     margin-right: 12%;
   }
+  .spot-card2 {
+    display: none
+  }
 }
 
 @media (max-width: 440px) {
@@ -355,10 +358,56 @@
     margin-bottom: 20px;
     margin-left: -.1px;
   }
+  .first-image3 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .dots-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .dot.active {
+    background-color: #717171;
+  }
+  .spot-card3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .mobile-spot-mainPic {
+    border-radius: 12px;
+    width: 95%;
+  }
+  
 }
 
 @media (min-width: 441px) {
   .button-box-2{
    display: none;
   }
+  .first-image3 {
+    display: none;
+  }
+  .spot-card3 {
+    display: none;
+  }
 }
+

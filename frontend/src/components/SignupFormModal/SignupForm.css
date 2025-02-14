@@ -7,11 +7,16 @@
 
 @media (max-width: 440px) {
     .signup-form {
-      width: 90vw;
+      width: 60vw;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      margin-top: -10%;
+    }
+    .signup-button-container {
+        width: 40vw;
+        margin-top: 3%;
     }
 }
 

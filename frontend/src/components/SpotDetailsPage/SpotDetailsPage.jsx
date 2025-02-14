@@ -14,9 +14,11 @@ function SpotDetails() {
     const [spot, setSpot] = useState({});     
     const [errors, setErrors] = useState(null);   
     const [reviews, setReviews] = useState(null);
-    const {spotId} = useParams() ;
+    const [activeIndex, setActiveIndex] = useState(0);
+    const {spotId} = useParams();
     const { setModalContent, closeModal } = useModal();
     const spotImages = [];
+    const mobileSpotImages = [];
 
     const sessionUser = useSelector((state) => state.session.user);
 
@@ -66,6 +68,12 @@ function SpotDetails() {
       if(spot.image2)spotImages.push(spot.image2)
       if(spot.image3)spotImages.push(spot.image3)
 
+      if(spot.previewImage)mobileSpotImages.push(spot.previewImage)
+      if(spot.image)mobileSpotImages.push(spot.image)
+      if(spot.image1)mobileSpotImages.push(spot.image1)
+      if(spot.image2)mobileSpotImages.push(spot.image2)
+      if(spot.image3)mobileSpotImages.push(spot.image3)
+
       const userHasReviewed = reviews?.find((review) => review.userId === sessionUser?.id);
 
       const openReviewForm = () => {
@@ -75,6 +83,11 @@ function SpotDetails() {
       const openUpdateReviewForm = () => {
         setModalContent(<ReviewFormModal spotId={spotId} closeModal={closeModal} userHasReviewed={userHasReviewed} spot={spot} reviewId={userHasReviewed.id} />);
       };
+
+      const handleDotClick = (index) => {
+        setActiveIndex(index);
+      };
+    
 
 return (
         <div className="root-details">
@@ -116,6 +129,26 @@ return (
                   ))}
                 </div>
               
+            </div>
+            <div className="spot-card3">
+            <picture className="first-image3">
+            <img
+              className="mobile-spot-mainPic"
+              src={mobileSpotImages[activeIndex]}
+              alt={spot.name}
+              title={spot.name}
+            />
+             <div className="dots-navigation">
+              {mobileSpotImages.map((_, index) => (
+                <span
+                key={index}
+                className={`dot ${activeIndex === index ? 'active' : ''}`}
+                onClick={() => handleDotClick(index)}
+               ></span>
+              ))}
+          </div>
+          </picture>
+
             </div>
           </section>
           <div className="section-2">
