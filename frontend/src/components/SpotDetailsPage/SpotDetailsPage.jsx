@@ -137,6 +137,10 @@ return (
               src={mobileSpotImages[activeIndex]}
               alt={spot.name}
               title={spot.name}
+              onClick={() => {
+                const nextActiveIndex = (activeIndex + 1) % mobileSpotImages.length;
+                setActiveIndex(nextActiveIndex);
+              }}
             />
              <div className="dots-navigation">
               {mobileSpotImages.map((_, index) => (
