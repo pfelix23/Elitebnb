@@ -477,6 +477,9 @@ label, .p {
     }
     .create-a-spot-form {
         width: 50vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .create-a-spot-text {
         width: 50%;
@@ -484,7 +487,7 @@ label, .p {
     .create-a-spot-container {
         padding: 1rem;
     }
-    .create-a-spot-input, .create-a-spot-input-1, .creative-container, .new-tile2 {
+    .create-a-spot-input, .create-a-spot-input-1, .create-a-spot-input-3,.creative-container, .new-tile2 {
         width: 95%;
     }
     .local-location-city-spot-input {
@@ -521,13 +524,10 @@ label, .p {
     .attention {
         width: 95%;
     }
-}
-
-@media (max-width: 440px) {
     .login-button-container {
         width: 60vw;
     }
     .create-a-spot-input-3 {
-        width: 95%;
+        width: 94%;
     }
-  }
+}
