@@ -397,6 +397,9 @@
     width: 95%;
     height: 275px;
   }
+  .root-details {
+    overflow-x: hidden;
+  }
   
 }
 
